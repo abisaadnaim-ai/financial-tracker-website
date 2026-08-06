@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FAQ — Financial Tracker Docs</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="../styles.css" />
+</head>
+<body class="bg-white text-slate-900 antialiased">
+
+<header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+    <a href="../index.html" class="flex items-center gap-2 font-bold text-slate-900">
+      <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-600 text-white text-xs font-bold">$</span>
+      <span>Financial Tracker</span>
+    </a>
+    <nav class="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
+      <a href="../index.html#features" class="hover:text-slate-900">Features</a>
+      <a href="../index.html#pricing" class="hover:text-slate-900">Pricing</a>
+      <a href="index.html" class="text-slate-900">Docs</a>
+    </nav>
+    <a href="/app" class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">Get started free</a>
+  </div>
+</header>
+
+<div class="mx-auto flex max-w-6xl gap-10 px-5 py-12">
+  <aside class="hidden w-52 shrink-0 md:block">
+    <nav class="sticky top-24 space-y-1 text-sm">
+      <a href="getting-started.html" class="block rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-50">Getting started</a>
+      <a href="transactions.html" class="block rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-50">Transactions &amp; fields</a>
+      <a href="investments.html" class="block rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-50">Investments &amp; portfolio</a>
+      <a href="plans.html" class="block rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-50">Plans &amp; pricing</a>
+      <a href="faq.html" class="block rounded-lg bg-emerald-50 px-3 py-2 font-semibold text-emerald-700">FAQ</a>
+    </nav>
+  </aside>
+
+  <main class="min-w-0 flex-1 pb-20">
+    <h1 class="text-3xl font-bold tracking-tight text-slate-900">Frequently asked questions</h1>
+
+    <div class="mt-8 divide-y divide-slate-100 rounded-xl border border-slate-200">
+      <details class="group p-5">
+        <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none">
+          Can I track more than one currency?
+        </summary>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600">Yes. Set a preferred currency in your profile for day-to-day totals, then hold assets or log transactions in any other currency — Financial Tracker converts and consolidates automatically wherever it shows a combined total.</p>
+      </details>
+      <details class="group p-5">
+        <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none">
+          How do refunds and reimbursements work?
+        </summary>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600">Log them as a negative amount on the same field the original expense used. It nets against that field's total instead of getting counted as separate income, so your category totals stay accurate.</p>
+      </details>
+      <details class="group p-5">
+        <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none">
+          I deleted a transaction by mistake — can I get it back?
+        </summary>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600">Yes, for your last three deletions. An Undo bar appears right after you delete something; click it to restore the exact entry.</p>
+      </details>
+      <details class="group p-5">
+        <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none">
+          What's the difference between Savings and Investments?
+        </summary>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600">Savings is a simple built-in field for cash you're setting aside — no setup required. Investments is a separate add-on module for tracking priced assets (stocks, funds, crypto, and more) with cost basis and gain/loss. Both feed into your overall net worth on the Dashboard, and your Savings balance also appears alongside cash holdings on the Portfolio tab.</p>
+      </details>
+      <details class="group p-5">
+        <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none">
+          Can I install this on my phone?
+        </summary>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600">Yes — it's a Progressive Web App. Open it in your mobile browser and choose "Add to Home Screen" to use it like a native app, with optional reminder notifications.</p>
+      </details>
+      <details class="group p-5">
+        <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none">
+          Is the app available in languages other than English?
+        </summary>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600">Yes, the core app supports English and Arabic. (The Investments module and admin tools are currently English-only.)</p>
+      </details>
+      <details class="group p-5">
+        <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none">
+          Can I export my data?
+        </summary>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600">Yes. Your transaction log, investment activity, and dashboard summary can each be exported to Excel at any time, filtered by whatever date range or view you're currently looking at.</p>
+      </details>
+      <details class="group p-5">
+        <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none">
+          What happens to my data if I downgrade or cancel?
+        </summary>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600">Your fields, transactions, and history are never deleted by a plan change. If a downgrade would put you over a new, lower field limit, you'll be asked to deactivate the extra fields yourself rather than having any of them removed automatically.</p>
+      </details>
+    </div>
+
+    <div class="mt-10 rounded-xl border border-slate-200 bg-slate-50 p-6">
+      <p class="text-sm font-semibold text-slate-900">Still have a question?</p>
+      <p class="mt-1 text-sm text-slate-600">Reach out at <a href="mailto:abisaadnaim@gmail.com" class="text-emerald-700 underline">abisaadnaim@gmail.com</a>.</p>
+    </div>
+  </main>
+</div>
+
+<footer class="border-t border-slate-100 py-8 text-center text-xs text-slate-400">
+  &copy; <span id="year"></span> Financial Tracker. All rights reserved.
+</footer>
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

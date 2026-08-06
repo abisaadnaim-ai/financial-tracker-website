@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Docs — Financial Tracker</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="../styles.css" />
+</head>
+<body class="bg-white text-slate-900 antialiased">
+
+<header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+    <a href="../index.html" class="flex items-center gap-2 font-bold text-slate-900">
+      <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-600 text-white text-xs font-bold">$</span>
+      <span>Financial Tracker</span>
+    </a>
+    <nav class="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
+      <a href="../index.html#features" class="hover:text-slate-900">Features</a>
+      <a href="../index.html#pricing" class="hover:text-slate-900">Pricing</a>
+      <a href="index.html" class="text-slate-900">Docs</a>
+    </nav>
+    <a href="/app" class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">Get started free</a>
+  </div>
+</header>
+
+<div class="mx-auto max-w-6xl px-5 py-14">
+  <h1 class="text-3xl font-bold tracking-tight text-slate-900">Documentation</h1>
+  <p class="mt-2 text-slate-600">Everything you need to get the most out of Financial Tracker.</p>
+
+  <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <a href="getting-started.html" class="card-hover rounded-xl border border-slate-200 p-6">
+      <h2 class="font-semibold text-slate-900">Getting started</h2>
+      <p class="mt-2 text-sm text-slate-600">Create your account, set your currency, and add your first fields.</p>
+    </a>
+    <a href="transactions.html" class="card-hover rounded-xl border border-slate-200 p-6">
+      <h2 class="font-semibold text-slate-900">Transactions &amp; fields</h2>
+      <p class="mt-2 text-sm text-slate-600">Custom fields, categories, refunds/corrections, undo, and filtering.</p>
+    </a>
+    <a href="investments.html" class="card-hover rounded-xl border border-slate-200 p-6">
+      <h2 class="font-semibold text-slate-900">Investments &amp; portfolio</h2>
+      <p class="mt-2 text-sm text-slate-600">Assets, categories, pricing, allocation, and multi-currency totals.</p>
+    </a>
+    <a href="plans.html" class="card-hover rounded-xl border border-slate-200 p-6">
+      <h2 class="font-semibold text-slate-900">Plans &amp; pricing</h2>
+      <p class="mt-2 text-sm text-slate-600">What's included in Free, Plus, and Unlimited, and how upgrading works.</p>
+    </a>
+    <a href="faq.html" class="card-hover rounded-xl border border-slate-200 p-6">
+      <h2 class="font-semibold text-slate-900">FAQ</h2>
+      <p class="mt-2 text-sm text-slate-600">Common questions about currencies, privacy, mobile install, and more.</p>
+    </a>
+  </div>
+</div>
+
+<footer class="border-t border-slate-100 py-8 text-center text-xs text-slate-400">
+  &copy; <span id="year"></span> Financial Tracker. All rights reserved.
+</footer>
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
