@@ -12,8 +12,122 @@ body {
   font-family: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 
+/* Redesign pass: a richer, multi-color "aurora" wash instead of the
+   original single soft-emerald radial — three overlapping gradients (
+   emerald, sky, violet) at low opacity, so the hero reads as more visually
+   alive without ever competing with the actual headline text on top of
+   it. */
 .hero-glow {
-  background: radial-gradient(60% 60% at 50% 0%, rgba(5, 150, 105, 0.12) 0%, rgba(5, 150, 105, 0) 70%);
+  background:
+    radial-gradient(50% 55% at 15% 10%, rgba(5, 150, 105, 0.16) 0%, rgba(5, 150, 105, 0) 70%),
+    radial-gradient(45% 50% at 85% 15%, rgba(2, 132, 199, 0.14) 0%, rgba(2, 132, 199, 0) 70%),
+    radial-gradient(55% 60% at 50% 100%, rgba(124, 58, 237, 0.08) 0%, rgba(124, 58, 237, 0) 70%);
+}
+
+/* ---- Redesign pass: gradient text, decorative blobs, floating card ------ */
+
+/* Emphasis word/phrase treatment for headlines — used sparingly (one
+   phrase per headline, not whole sentences) so it still reads as a real
+   accent rather than a gimmick. */
+.text-gradient {
+  background: linear-gradient(120deg, #059669 0%, #0284c7 60%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Soft, large, blurred color fields placed behind hero/CTA content —
+   purely decorative (aria-hidden, pointer-events: none in the markup),
+   never behind anything that needs to stay legible on its own. Parent
+   needs `relative overflow-hidden` for these to stay clipped to their
+   section. */
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* "Most popular" pricing card — a soft animated glow behind a solid card,
+   instead of the previous flat 2px border, so the recommended plan reads
+   as genuinely highlighted rather than just outlined. */
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+.glow-ring {
+  position: absolute;
+  inset: -2px;
+  border-radius: 1.25rem;
+  background: linear-gradient(135deg, #059669, #0284c7, #7c3aed);
+  z-index: -1;
+  animation: glow-pulse 4s ease-in-out infinite;
+}
+
+/* ---- Redesign pass: reveal-on-scroll (script.js) ------------------------
+   Starts every `.reveal` element faded and slightly lowered; script.js
+   adds `.is-visible` the first time it scrolls into view. Kept to a small,
+   consistent rise (12px) and a quick-but-not-instant duration so a page
+   full of these doesn't feel like a slideshow. Respects reduced-motion by
+   skipping straight to the visible state. */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Stagger helpers for grids of reveal elements (feature cards, pricing
+   tiers, steps) — small, capped delays so a 6-item grid still finishes
+   settling well under a second. */
+.reveal-delay-1 {
+  transition-delay: 0.08s;
+}
+.reveal-delay-2 {
+  transition-delay: 0.16s;
+}
+.reveal-delay-3 {
+  transition-delay: 0.24s;
+}
+.reveal-delay-4 {
+  transition-delay: 0.32s;
+}
+.reveal-delay-5 {
+  transition-delay: 0.4s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .float {
+    animation: none;
+  }
+  .glow-ring {
+    animation: none;
+  }
 }
 
 /* Premium-polish pass: a soft default shadow (not just the on-hover one

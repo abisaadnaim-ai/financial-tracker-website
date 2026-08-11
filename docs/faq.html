@@ -12,7 +12,7 @@
 <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
     <a href="../index.html" class="flex items-center gap-2 font-bold text-slate-900">
-      <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-600 text-white text-xs font-bold">$</span>
+      <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-500 to-sky-600 text-white text-xs font-bold shadow-sm">$</span>
       <span>Financial Tracker</span>
     </a>
     <nav class="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
@@ -36,9 +36,11 @@
   </aside>
 
   <main class="min-w-0 flex-1 pb-20">
-    <h1 class="text-3xl font-bold tracking-tight text-slate-900">Frequently asked questions</h1>
+    <div class="reveal">
+      <h1 class="text-3xl font-bold tracking-tight text-slate-900">Frequently asked questions</h1>
+    </div>
 
-    <div class="mt-8 divide-y divide-slate-100 rounded-xl border border-slate-200">
+    <div class="mt-8 divide-y divide-slate-100 rounded-xl border border-slate-200 reveal reveal-delay-1">
       <details class="group p-5">
         <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none">
           Can I track more than one currency?
@@ -100,5 +102,6 @@
   &copy; <span id="year"></span> Financial Tracker. All rights reserved.
 </footer>
 <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+<script src="../script.js" defer></script>
 </body>
 </html>

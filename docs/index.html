@@ -12,7 +12,7 @@
 <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
     <a href="../index.html" class="flex items-center gap-2 font-bold text-slate-900">
-      <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-600 text-white text-xs font-bold">$</span>
+      <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-500 to-sky-600 text-white text-xs font-bold shadow-sm">$</span>
       <span>Financial Tracker</span>
     </a>
     <nav class="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
@@ -25,28 +25,35 @@
 </header>
 
 <div class="mx-auto max-w-6xl px-5 py-14">
-  <h1 class="text-3xl font-bold tracking-tight text-slate-900">Documentation</h1>
-  <p class="mt-2 text-slate-600">Everything you need to get the most out of Financial Tracker.</p>
+  <div class="reveal">
+    <h1 class="text-3xl font-bold tracking-tight text-slate-900"><span class="text-gradient">Documentation</span></h1>
+    <p class="mt-2 text-slate-600">Everything you need to get the most out of Financial Tracker.</p>
+  </div>
 
   <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-    <a href="getting-started.html" class="card-hover rounded-xl border border-slate-200 p-6">
-      <h2 class="font-semibold text-slate-900">Getting started</h2>
+    <a href="getting-started.html" class="card-hover reveal reveal-delay-1 rounded-xl border border-slate-200 p-6">
+      <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-sm font-bold text-emerald-600 ring-4 ring-emerald-50/60">1</span>
+      <h2 class="mt-3 font-semibold text-slate-900">Getting started</h2>
       <p class="mt-2 text-sm text-slate-600">Create your account, set your currency, and add your first fields.</p>
     </a>
-    <a href="transactions.html" class="card-hover rounded-xl border border-slate-200 p-6">
-      <h2 class="font-semibold text-slate-900">Transactions &amp; fields</h2>
+    <a href="transactions.html" class="card-hover reveal reveal-delay-2 rounded-xl border border-slate-200 p-6">
+      <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-sky-50 text-sm font-bold text-sky-600 ring-4 ring-sky-50/60">2</span>
+      <h2 class="mt-3 font-semibold text-slate-900">Transactions &amp; fields</h2>
       <p class="mt-2 text-sm text-slate-600">Custom fields, categories, refunds/corrections, undo, and filtering.</p>
     </a>
-    <a href="investments.html" class="card-hover rounded-xl border border-slate-200 p-6">
-      <h2 class="font-semibold text-slate-900">Investments &amp; portfolio</h2>
+    <a href="investments.html" class="card-hover reveal reveal-delay-3 rounded-xl border border-slate-200 p-6">
+      <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-50 text-sm font-bold text-violet-600 ring-4 ring-violet-50/60">3</span>
+      <h2 class="mt-3 font-semibold text-slate-900">Investments &amp; portfolio</h2>
       <p class="mt-2 text-sm text-slate-600">Assets, categories, pricing, allocation, and multi-currency totals.</p>
     </a>
-    <a href="plans.html" class="card-hover rounded-xl border border-slate-200 p-6">
-      <h2 class="font-semibold text-slate-900">Plans &amp; pricing</h2>
+    <a href="plans.html" class="card-hover reveal reveal-delay-1 rounded-xl border border-slate-200 p-6">
+      <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-50 text-sm font-bold text-amber-600 ring-4 ring-amber-50/60">4</span>
+      <h2 class="mt-3 font-semibold text-slate-900">Plans &amp; pricing</h2>
       <p class="mt-2 text-sm text-slate-600">What's included in Free, Plus, and Unlimited, and how upgrading works.</p>
     </a>
-    <a href="faq.html" class="card-hover rounded-xl border border-slate-200 p-6">
-      <h2 class="font-semibold text-slate-900">FAQ</h2>
+    <a href="faq.html" class="card-hover reveal reveal-delay-2 rounded-xl border border-slate-200 p-6">
+      <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-rose-50 text-sm font-bold text-rose-600 ring-4 ring-rose-50/60">5</span>
+      <h2 class="mt-3 font-semibold text-slate-900">FAQ</h2>
       <p class="mt-2 text-sm text-slate-600">Common questions about currencies, privacy, mobile install, and more.</p>
     </a>
   </div>
@@ -56,5 +63,6 @@
   &copy; <span id="year"></span> Financial Tracker. All rights reserved.
 </footer>
 <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+<script src="../script.js" defer></script>
 </body>
 </html>
