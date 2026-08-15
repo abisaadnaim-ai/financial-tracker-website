@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Financial Tracker</title>
-<meta name="description" content="Track transactions, savings, and multi-currency investments in one place. Financial Tracker gives you real net worth, portfolio allocation, and reports — bilingual, mobile-ready." />
+<meta name="description" content="Track transactions, savings, and multi-currency investments in one place. Financial Tracker gives you real net worth, portfolio allocation, and reports — plus Penny, a built-in AI assistant that answers questions about your own finances. Bilingual, mobile-ready." />
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="styles.css" />
 </head>
@@ -24,6 +24,7 @@
     </a>
     <nav class="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
       <a href="#features" class="hover:text-slate-900">Features</a>
+      <a href="#assistant" class="hover:text-slate-900">AI Assistant</a>
       <a href="#how-it-works" class="hover:text-slate-900">How it works</a>
       <a href="#pricing" class="hover:text-slate-900">Pricing</a>
       <a href="docs/index.html" class="hover:text-slate-900">Docs</a>
@@ -161,6 +162,63 @@
   </div>
 </section>
 
+<!-- AI Assistant -->
+<section id="assistant" class="border-y border-slate-100 bg-slate-50/60">
+  <div class="relative mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 md:grid-cols-2">
+    <div class="reveal order-2 md:order-1">
+      <span class="inline-flex items-center rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700 ring-1 ring-indigo-200">
+        Built in, no setup
+      </span>
+      <h2 class="mt-5 text-2xl font-bold leading-tight tracking-tight text-slate-900 sm:text-3xl">
+        Meet <span class="text-gradient">Penny</span>, your AI assistant
+      </h2>
+      <p class="mt-4 text-slate-600">
+        Penny lives in a chat bubble on every page, so you never have to dig through reports to get an answer. Ask it about your own money in plain English — or Arabic — and it looks at your real transactions and portfolio to reply.
+      </p>
+      <ul class="mt-6 space-y-3 text-sm text-slate-600">
+        <li class="flex gap-2.5">
+          <span class="mt-0.5 text-indigo-600">✓</span>
+          <span><strong class="text-slate-900">Ask about your spending, any time range.</strong> "How much did I spend on dining last month?" or "What was my savings rate in 2025?" — not just a fixed recent window.</span>
+        </li>
+        <li class="flex gap-2.5">
+          <span class="mt-0.5 text-indigo-600">✓</span>
+          <span><strong class="text-slate-900">Ask about your portfolio.</strong> Holdings, current value, and unrealized gain or loss, computed with the exact same numbers as your Investments tab.</span>
+        </li>
+        <li class="flex gap-2.5">
+          <span class="mt-0.5 text-indigo-600">✓</span>
+          <span><strong class="text-slate-900">Ask "how do I…" questions.</strong> Penny explains the app and can take you straight to the right screen.</span>
+        </li>
+        <li class="flex gap-2.5">
+          <span class="mt-0.5 text-indigo-600">✓</span>
+          <span><strong class="text-slate-900">Private by design.</strong> Penny can only ever see your own account's data — never anyone else's — and doesn't remember the conversation after you close it.</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Illustrative chat mockup — not a real screenshot -->
+    <div class="card-hover float reveal reveal-delay-2 order-1 mx-auto w-full max-w-sm rounded-2xl border border-slate-200 bg-white p-5 shadow-xl md:order-2">
+      <div class="flex items-center gap-2 border-b border-slate-100 pb-3">
+        <span class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-sm font-bold text-white">P</span>
+        <div>
+          <p class="text-sm font-semibold text-slate-900">Penny</p>
+          <p class="text-[11px] text-slate-400">Your finances, answered</p>
+        </div>
+      </div>
+      <div class="mt-4 space-y-3">
+        <div class="max-w-[85%] rounded-2xl rounded-bl-sm bg-slate-100 px-3.5 py-2.5 text-sm text-slate-700">
+          Hi, I'm Penny — ask me anything about your finances 👋
+        </div>
+        <div class="ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-indigo-600 px-3.5 py-2.5 text-sm text-white">
+          How much did I spend on dining last month?
+        </div>
+        <div class="max-w-[85%] rounded-2xl rounded-bl-sm bg-slate-100 px-3.5 py-2.5 text-sm text-slate-700">
+          You spent <span class="font-semibold">$284.50</span> on Dining in July, across 11 transactions — about 9% of your total spending that month.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- How it works -->
 <section id="how-it-works" class="border-y border-slate-100 bg-slate-50/60">
   <div class="mx-auto max-w-6xl px-5 py-20">
@@ -260,6 +318,7 @@
     </div>
     <nav class="flex flex-wrap items-center justify-center gap-6">
       <a href="#features" class="hover:text-slate-800">Features</a>
+      <a href="#assistant" class="hover:text-slate-800">AI Assistant</a>
       <a href="#pricing" class="hover:text-slate-800">Pricing</a>
       <a href="docs/index.html" class="hover:text-slate-800">Docs</a>
       <a href="mailto:abisaadnaim@gmail.com" class="hover:text-slate-800">Contact</a>
