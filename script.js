@@ -35,3 +35,30 @@
     io.observe(el);
   });
 })();
+
+// Mobile nav toggle — shared header markup on every page has a
+// #mobile-nav-toggle button and a #mobile-nav panel (see styles.css for the
+// #mobile-nav:not(.open){display:none} rule). Closes on link click or Escape
+// so it never lingers open after navigating.
+(function () {
+  var toggle = document.getElementById("mobile-nav-toggle");
+  var panel = document.getElementById("mobile-nav");
+  if (!toggle || !panel) return;
+
+  function setOpen(open) {
+    panel.classList.toggle("open", open);
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+
+  toggle.addEventListener("click", function () {
+    setOpen(!panel.classList.contains("open"));
+  });
+  panel.querySelectorAll("a").forEach(function (a) {
+    a.addEventListener("click", function () {
+      setOpen(false);
+    });
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") setOpen(false);
+  });
+})();

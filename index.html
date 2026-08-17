@@ -3,331 +3,664 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Raseedee</title>
-<meta name="description" content="Track transactions, savings, and multi-currency investments in one place. Raseedee gives you real net worth, portfolio allocation, and reports — plus Penny, a built-in AI assistant that answers questions about your own finances. Bilingual, mobile-ready." />
+<title>Raseed — Personal Finance for the Gulf</title>
+<meta name="description" content="Track spending, savings, investments and net worth in one bilingual personal finance app built for the Gulf and Middle East." />
+<link rel="canonical" href="https://www.raseedee.com/" />
+
+<!-- OpenGraph / social preview -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Raseed" />
+<meta property="og:title" content="Raseed — Personal Finance for the Gulf" />
+<meta property="og:description" content="Track spending, savings, investments and net worth in one bilingual personal finance app built for the Gulf and Middle East." />
+<meta property="og:url" content="https://www.raseedee.com/" />
+<meta property="og:image" content="https://www.raseedee.com/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Raseed — Personal Finance for the Gulf" />
+<meta name="twitter:description" content="Track spending, savings, investments and net worth in one bilingual personal finance app built for the Gulf and Middle East." />
+<!-- TODO: og-image.png (1200x630 social preview) does not exist yet in this
+     repo — generate one and drop it at the site root, or this tag will
+     404 silently on link previews (Slack/Twitter/WhatsApp/etc). -->
+
 <script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          navy: '#13224D',
+          navy2: '#1B2F5E',
+          navy3: '#0B1730',
+          gold: '#C9A227',
+          goldlight: '#E4C767',
+          ice: '#E7ECF7',
+        },
+      },
+    },
+  };
+</script>
 <link rel="stylesheet" href="styles.css" />
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <link rel="icon" href="favicon.ico" sizes="any" />
 <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 </head>
-<body class="bg-white text-slate-900 antialiased">
+<body class="bg-navy text-ice antialiased">
 
 <!-- Nav -->
-<header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
+<header class="sticky top-0 z-50 border-b border-white/10 bg-navy/90 backdrop-blur">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-    <a href="/" class="flex items-center gap-2 font-bold text-slate-900">
-      <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-900 shadow-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px">
+    <a href="/" class="flex items-center gap-2 font-bold text-white">
+      <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-gold">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#13224D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px">
           <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
           <polyline points="16 7 22 7 22 13" />
         </svg>
       </span>
-      <span>Raseedee</span>
+      <span>Raseed</span>
     </a>
-    <nav class="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
-      <a href="#features" class="hover:text-slate-900">Features</a>
-      <a href="#assistant" class="hover:text-slate-900">AI Assistant</a>
-      <a href="#how-it-works" class="hover:text-slate-900">How it works</a>
-      <a href="#pricing" class="hover:text-slate-900">Pricing</a>
-      <a href="docs/index.html" class="hover:text-slate-900">Docs</a>
+    <nav class="hidden items-center gap-8 text-sm font-medium text-ice/70 md:flex">
+      <a href="#product" class="hover:text-white">Product</a>
+      <a href="#ai" class="hover:text-white">AI</a>
+      <a href="#investments" class="hover:text-white">Investments</a>
+      <a href="#pricing" class="hover:text-white">Pricing</a>
+      <a href="about.html" class="hover:text-white">About</a>
     </nav>
     <div class="flex items-center gap-3">
-      <a href="https://financial-trackerv1.vercel.app" class="hidden text-sm font-medium text-slate-600 hover:text-slate-900 sm:block">Log in</a>
-      <a href="https://financial-trackerv1.vercel.app" class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">Get started free</a>
+      <a href="https://financial-trackerv1.vercel.app" class="hidden text-sm font-medium text-ice/70 hover:text-white sm:block">Log in</a>
+      <a href="https://financial-trackerv1.vercel.app" class="rounded-lg bg-gold px-4 py-2 text-sm font-semibold text-navy hover:bg-goldlight">Get Started Free</a>
+      <button id="mobile-nav-toggle" class="flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 text-ice md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
     </div>
   </div>
+  <!-- Mobile nav panel — toggled by script.js via #mobile-nav-toggle; see
+       styles.css for the #mobile-nav:not(.open){display:none} rule. -->
+  <nav id="mobile-nav" class="border-t border-white/10 bg-navy px-5 py-4 md:hidden">
+    <div class="flex flex-col gap-4 text-sm font-medium text-ice/80">
+      <a href="#product" class="py-1">Product</a>
+      <a href="#ai" class="py-1">AI</a>
+      <a href="#investments" class="py-1">Investments</a>
+      <a href="#pricing" class="py-1">Pricing</a>
+      <a href="about.html" class="py-1">About</a>
+      <a href="docs/index.html" class="py-1">Documentation</a>
+      <a href="https://financial-trackerv1.vercel.app" class="py-1">Log in</a>
+    </div>
+  </nav>
 </header>
 
 <!-- Hero -->
-<section class="hero-glow relative overflow-hidden border-b border-slate-100">
-  <!-- Decorative blobs (see .blob in styles.css) — purely visual, clipped
-       to this section, never behind text that needs to stay legible on
-       its own. -->
-  <div class="blob -left-24 -top-24 h-72 w-72 bg-emerald-300/30" aria-hidden="true"></div>
-  <div class="blob -right-16 top-10 h-64 w-64 bg-sky-300/30" aria-hidden="true"></div>
-  <div class="blob bottom-[-6rem] left-1/3 h-72 w-72 bg-violet-300/20" aria-hidden="true"></div>
+<section class="hero-glow relative overflow-hidden border-b border-white/10">
+  <div class="blob -left-24 -top-24 h-72 w-72 bg-gold/10" aria-hidden="true"></div>
+  <div class="blob -right-16 top-10 h-64 w-64 bg-navy2/60" aria-hidden="true"></div>
 
   <div class="relative mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 md:grid-cols-2 md:py-24">
     <div class="reveal">
-      <span class="inline-flex items-center rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-200">
-        Now with unified Savings + Investments net worth
+      <span class="inline-flex items-center rounded-full bg-gold/10 px-3 py-1 text-xs font-semibold text-goldlight ring-1 ring-gold/30">
+        Built for the Gulf &amp; Middle East
       </span>
-      <h1 class="mt-5 text-4xl font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl">
-        Every transaction, every currency, every asset —
-        <span class="text-gradient">one dashboard.</span>
+      <h1 class="mt-5 text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl">
+        Your money, <span class="text-gradient">finally in one place.</span>
       </h1>
-      <p class="mt-5 text-lg text-slate-600">
-        Raseedee replaces the spreadsheet: log income and expenses with your own custom fields, watch your real net worth update automatically, and track a multi-currency investment portfolio right alongside your savings.
+      <p class="mt-5 text-lg text-ice/80">
+        Track spending, savings, investments and net worth — built for the Gulf, in Arabic and English.
+      </p>
+      <p class="mt-4 text-xs font-semibold uppercase tracking-wider text-ice/40">
+        QAR · SAR · AED · KWD · BHD · OMR · and more
       </p>
       <div class="mt-8 flex flex-wrap gap-3">
-        <a href="https://financial-trackerv1.vercel.app" class="rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700">Get started free</a>
-        <a href="docs/index.html" class="rounded-lg border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50">Read the docs</a>
+        <a href="https://financial-trackerv1.vercel.app" class="rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-navy shadow-sm hover:bg-goldlight">Get Started Free</a>
+        <a href="#how-it-works" class="rounded-lg border border-white/20 px-6 py-3 text-sm font-semibold text-ice hover:bg-white/5">See How It Works</a>
       </div>
-      <p class="mt-4 text-xs text-slate-400">No credit card required · Free plan available forever</p>
+      <p class="mt-4 text-xs text-ice/40">No credit card required · Free plan available forever</p>
     </div>
 
-    <!-- Illustrative dashboard mockup — not a real screenshot -->
-    <div class="card-hover float reveal reveal-delay-2 rounded-2xl border border-slate-200 bg-white p-5 shadow-xl">
-      <div class="flex items-center justify-between">
-        <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">Net worth</p>
-        <span class="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">+8.2% this year</span>
+    <!-- Product hero visual — a high-fidelity mockup of the actual dashboard
+         layout/data model, not a literal screenshot (no authenticated
+         screenshot could be captured for this build). Swap the inner panel
+         for a real screenshot whenever one is available; markup is a single
+         self-contained block so a straight <img> can drop in later. -->
+    <div class="card-hover float reveal reveal-delay-2 overflow-hidden rounded-2xl border border-white/10 bg-white shadow-2xl shadow-black/40">
+      <div class="flex items-center gap-1.5 border-b border-slate-100 bg-navy px-4 py-2.5">
+        <span class="h-2.5 w-2.5 rounded-full bg-[#E5735A]"></span>
+        <span class="h-2.5 w-2.5 rounded-full bg-[#E8C15A]"></span>
+        <span class="h-2.5 w-2.5 rounded-full bg-[#59C27A]"></span>
+        <span class="ml-auto text-[10px] font-semibold uppercase tracking-wider text-ice/50">Raseed · Dashboard</span>
       </div>
-      <p class="mt-1 text-3xl font-bold tabular-nums text-slate-900">$48,920.15</p>
-      <div class="mt-4 grid grid-cols-3 gap-2">
-        <div class="rounded-lg border border-slate-100 bg-slate-50 p-2.5">
-          <p class="text-[10px] font-medium uppercase text-slate-400">Savings</p>
-          <p class="mt-0.5 text-sm font-semibold text-slate-900">$13,777</p>
+      <div class="p-5">
+        <div class="flex items-center justify-between">
+          <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">Net worth</p>
+          <span class="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">+6.2% vs last month</span>
         </div>
-        <div class="rounded-lg border border-slate-100 bg-slate-50 p-2.5">
-          <p class="text-[10px] font-medium uppercase text-slate-400">Invested</p>
-          <p class="mt-0.5 text-sm font-semibold text-slate-900">$31,140</p>
+        <p class="mt-1 text-3xl font-bold tabular-nums text-navy">QAR 178,420</p>
+        <div class="mt-4 grid grid-cols-3 gap-2">
+          <div class="rounded-lg border border-slate-100 bg-slate-50 p-2.5">
+            <p class="text-[10px] font-medium uppercase text-slate-400">Savings</p>
+            <p class="mt-0.5 text-sm font-semibold text-navy">42,300</p>
+          </div>
+          <div class="rounded-lg border border-slate-100 bg-slate-50 p-2.5">
+            <p class="text-[10px] font-medium uppercase text-slate-400">Invested</p>
+            <p class="mt-0.5 text-sm font-semibold text-navy">61,900</p>
+          </div>
+          <div class="rounded-lg border border-slate-100 bg-slate-50 p-2.5">
+            <p class="text-[10px] font-medium uppercase text-slate-400">Net worth</p>
+            <p class="mt-0.5 text-sm font-semibold text-navy">178,420</p>
+          </div>
         </div>
-        <div class="rounded-lg border border-slate-100 bg-slate-50 p-2.5">
-          <p class="text-[10px] font-medium uppercase text-slate-400">Unrealized</p>
-          <p class="mt-0.5 text-sm font-semibold text-emerald-600">+$4,003</p>
+        <div class="mt-5 flex h-24 items-end gap-1.5">
+          <div class="bar w-full rounded-t bg-ice" style="height:35%"></div>
+          <div class="bar w-full rounded-t bg-ice" style="height:52%"></div>
+          <div class="bar w-full rounded-t bg-slate-200" style="height:44%"></div>
+          <div class="bar w-full rounded-t bg-slate-200" style="height:68%"></div>
+          <div class="bar w-full rounded-t bg-slate-300" style="height:60%"></div>
+          <div class="bar w-full rounded-t bg-slate-300" style="height:80%"></div>
+          <div class="bar w-full rounded-t bg-gold" style="height:95%"></div>
         </div>
-      </div>
-      <div class="mt-5 flex h-24 items-end gap-1.5">
-        <div class="bar w-full rounded-t bg-sky-200" style="height:35%"></div>
-        <div class="bar w-full rounded-t bg-sky-300" style="height:52%"></div>
-        <div class="bar w-full rounded-t bg-sky-300" style="height:44%"></div>
-        <div class="bar w-full rounded-t bg-emerald-400" style="height:68%"></div>
-        <div class="bar w-full rounded-t bg-emerald-400" style="height:60%"></div>
-        <div class="bar w-full rounded-t bg-emerald-500" style="height:80%"></div>
-        <div class="bar w-full rounded-t bg-emerald-600" style="height:95%"></div>
-      </div>
-      <div class="mt-3 flex items-center justify-between text-[10px] text-slate-400">
-        <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span>
+        <div class="mt-3 flex items-center justify-between text-[10px] text-slate-400">
+          <span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Logos / trust strip (currencies) -->
-<section class="border-b border-slate-100 bg-slate-50/60">
-  <div class="reveal mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-3 px-5 py-6 text-sm font-semibold text-slate-400">
-    <span>Track in any currency —</span>
-    <span>USD</span><span>QAR</span><span>EUR</span><span>GBP</span><span>AED</span><span>+more</span>
+<!-- Problem -->
+<section class="border-b border-white/10 bg-navy3">
+  <div class="mx-auto max-w-5xl px-5 py-20">
+    <div class="reveal mx-auto max-w-2xl text-center">
+      <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Your financial life shouldn't be scattered across different places.</h2>
+    </div>
+
+    <div class="reveal reveal-delay-1 mt-8 flex flex-wrap justify-center gap-2.5">
+      <span class="rounded-full border border-white/10 bg-navy2/50 px-3.5 py-1.5 text-xs font-medium text-ice/70">Salary in one account</span>
+      <span class="rounded-full border border-white/10 bg-navy2/50 px-3.5 py-1.5 text-xs font-medium text-ice/70">Multiple cards</span>
+      <span class="rounded-full border border-white/10 bg-navy2/50 px-3.5 py-1.5 text-xs font-medium text-ice/70">Recurring expenses</span>
+      <span class="rounded-full border border-white/10 bg-navy2/50 px-3.5 py-1.5 text-xs font-medium text-ice/70">Savings</span>
+      <span class="rounded-full border border-white/10 bg-navy2/50 px-3.5 py-1.5 text-xs font-medium text-ice/70">Installments</span>
+      <span class="rounded-full border border-white/10 bg-navy2/50 px-3.5 py-1.5 text-xs font-medium text-ice/70">Investments</span>
+      <span class="rounded-full border border-white/10 bg-navy2/50 px-3.5 py-1.5 text-xs font-medium text-ice/70">Cash transactions</span>
+    </div>
+
+    <div class="mt-12 grid gap-4 sm:grid-cols-2">
+      <div class="reveal reveal-delay-1 rounded-xl border border-white/10 bg-navy2/40 p-5">
+        <p class="font-serif-display text-lg text-white">"Where did my money actually go?"</p>
+      </div>
+      <div class="reveal reveal-delay-2 rounded-xl border border-white/10 bg-navy2/40 p-5">
+        <p class="font-serif-display text-lg text-white">"How much did I really save?"</p>
+      </div>
+      <div class="reveal reveal-delay-3 rounded-xl border border-white/10 bg-navy2/40 p-5">
+        <p class="font-serif-display text-lg text-white">"What is my net worth today?"</p>
+      </div>
+      <div class="reveal reveal-delay-4 rounded-xl border border-white/10 bg-navy2/40 p-5">
+        <p class="font-serif-display text-lg text-white">"Am I financially better off than last year?"</p>
+      </div>
+    </div>
+    <p class="reveal reveal-delay-5 mt-8 text-center text-sm text-ice/50">More control than a bank app. Less work than a spreadsheet.</p>
   </div>
 </section>
 
-<!-- Features -->
-<section id="features" class="mx-auto max-w-6xl px-5 py-20">
+<!-- Product: Track -> Understand -> Grow -->
+<section id="product" class="mx-auto max-w-6xl px-5 py-20">
   <div class="reveal mx-auto max-w-2xl text-center">
-    <h2 class="text-2xl font-bold tracking-tight text-slate-900">Everything your money needs, in <span class="text-gradient">one app</span></h2>
-    <p class="mt-3 text-slate-600">Built for people who want more control than a bank app and less busywork than a spreadsheet.</p>
+    <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Track. Understand. <span class="text-gradient">Grow.</span></h2>
+    <p class="mt-3 text-ice/70">One system for your whole financial picture — not three different apps.</p>
   </div>
 
-  <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-    <div class="card-hover reveal reveal-delay-1 rounded-xl border border-slate-200 p-6">
-      <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 ring-4 ring-emerald-50/60">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h7"/></svg>
-      </div>
-      <h3 class="mt-4 font-semibold text-slate-900">Custom transaction fields</h3>
-      <p class="mt-2 text-sm text-slate-600">Define your own income and expense fields, grouped by Needs/Wants or Revenue/Saving/Investment — not a rigid category list someone else picked for you.</p>
+  <div class="mt-12 grid gap-6 md:grid-cols-3">
+    <div class="card-hover-dark reveal reveal-delay-1 rounded-xl border border-white/10 bg-navy2/40 p-6">
+      <span class="text-xs font-bold uppercase tracking-widest text-goldlight">Track</span>
+      <ul class="mt-4 space-y-2.5 text-sm text-ice/70">
+        <li class="flex gap-2"><span class="text-gold">✓</span> Income</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> Expenses</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> Recurring transactions</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> Savings</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> Installments</li>
+      </ul>
     </div>
-    <div class="card-hover reveal reveal-delay-2 rounded-xl border border-slate-200 p-6">
-      <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-sky-50 text-sky-600 ring-4 ring-sky-50/60">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3v18h18M7 15l4-4 3 3 5-6"/></svg>
-      </div>
-      <h3 class="mt-4 font-semibold text-slate-900">Real net worth, always current</h3>
-      <p class="mt-2 text-sm text-slate-600">Your dashboard combines savings and investment value into one net worth figure, with year-over-year comparisons and an installment payoff timeline.</p>
+    <div class="card-hover-dark reveal reveal-delay-2 rounded-xl border border-white/10 bg-navy2/40 p-6">
+      <span class="text-xs font-bold uppercase tracking-widest text-goldlight">Understand</span>
+      <ul class="mt-4 space-y-2.5 text-sm text-ice/70">
+        <li class="flex gap-2"><span class="text-gold">✓</span> Savings rate</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> Spending breakdown</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> Income vs. expenses</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> Monthly trends</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> Net worth</li>
+      </ul>
     </div>
-    <div class="card-hover reveal reveal-delay-3 rounded-xl border border-slate-200 p-6">
-      <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-violet-50 text-violet-600 ring-4 ring-violet-50/60">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2a10 10 0 100 20 10 10 0 000-20zM12 2v10l6 4"/></svg>
-      </div>
-      <h3 class="mt-4 font-semibold text-slate-900">Multi-currency investment portfolio</h3>
-      <p class="mt-2 text-sm text-slate-600">Hold stocks, ETFs, mutual funds, bonds, crypto, commodities, and more. See allocation by category, click any slice for a full breakdown, and track live or manual prices.</p>
+    <div class="card-hover-dark reveal reveal-delay-3 rounded-xl border border-white/10 bg-navy2/40 p-6">
+      <span class="text-xs font-bold uppercase tracking-widest text-goldlight">Grow</span>
+      <ul class="mt-4 space-y-2.5 text-sm text-ice/70">
+        <li class="flex gap-2"><span class="text-gold">✓</span> Investments</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> Portfolio performance</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> Financial goals</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> AI-powered insights</li>
+      </ul>
     </div>
-    <div class="card-hover reveal reveal-delay-1 rounded-xl border border-slate-200 p-6">
-      <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-50 text-amber-600 ring-4 ring-amber-50/60">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4-4 4M7 8l-4 4 4 4M14 4l-4 16"/></svg>
-      </div>
-      <h3 class="mt-4 font-semibold text-slate-900">Refunds and corrections, handled</h3>
-      <p class="mt-2 text-sm text-slate-600">Enter a negative amount on any field for a reimbursement, refund, or correction — and undo your last three deletions in one click if you change your mind.</p>
+  </div>
+</section>
+
+<!-- Product screenshots -->
+<section class="border-y border-white/10 bg-navy3">
+  <div class="mx-auto max-w-6xl px-5 py-20">
+    <div class="reveal mx-auto max-w-2xl text-center">
+      <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">See it, not just read about it.</h2>
     </div>
-    <div class="card-hover reveal reveal-delay-2 rounded-xl border border-slate-200 p-6">
-      <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-rose-50 text-rose-600 ring-4 ring-rose-50/60">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v6M8 21h8M4 4h16v8a8 8 0 01-16 0V4z"/></svg>
+
+    <!-- Transaction logging -->
+    <div class="mt-16 grid items-center gap-10 md:grid-cols-2">
+      <div class="reveal reveal-delay-1 order-2 md:order-1">
+        <h3 class="text-xl font-semibold text-white">Log transactions in seconds</h3>
+        <p class="mt-3 text-sm leading-relaxed text-ice/70">Record income and expenses with your own fields, in any currency — no rigid category list to fight with.</p>
       </div>
-      <h3 class="mt-4 font-semibold text-slate-900">Export anything to Excel</h3>
-      <p class="mt-2 text-sm text-slate-600">Your transaction log, investment activity, and dashboard summary are always one click away from a clean spreadsheet — no manual copy-pasting.</p>
+      <div class="card-hover reveal reveal-delay-2 order-1 overflow-hidden rounded-2xl border border-white/10 bg-white shadow-xl shadow-black/30 md:order-2">
+        <div class="flex items-center gap-1.5 border-b border-slate-100 bg-navy px-4 py-2.5">
+          <span class="h-2.5 w-2.5 rounded-full bg-[#E5735A]"></span><span class="h-2.5 w-2.5 rounded-full bg-[#E8C15A]"></span><span class="h-2.5 w-2.5 rounded-full bg-[#59C27A]"></span>
+          <span class="ml-auto text-[10px] font-semibold uppercase tracking-wider text-ice/50">Raseed · Add Transaction</span>
+        </div>
+        <div class="space-y-3 p-5 text-sm">
+          <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-3 py-2.5">
+            <span class="text-slate-500">Field</span><span class="font-medium text-navy">Groceries</span>
+          </div>
+          <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-3 py-2.5">
+            <span class="text-slate-500">Amount</span><span class="font-medium text-navy">QAR 214.50</span>
+          </div>
+          <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-3 py-2.5">
+            <span class="text-slate-500">Date</span><span class="font-medium text-navy">Today</span>
+          </div>
+          <div class="rounded-lg bg-gold px-3 py-2.5 text-center text-sm font-semibold text-navy">Save transaction</div>
+        </div>
+      </div>
     </div>
-    <div class="card-hover reveal reveal-delay-3 rounded-xl border border-slate-200 p-6">
-      <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-50 text-teal-600 ring-4 ring-teal-50/60">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 2h10a1 1 0 011 1v18a1 1 0 01-1 1H7a1 1 0 01-1-1V3a1 1 0 011-1zM11 18h2"/></svg>
+
+    <!-- Reports / spending analysis -->
+    <div class="mt-16 grid items-center gap-10 md:grid-cols-2">
+      <div class="card-hover reveal reveal-delay-1 overflow-hidden rounded-2xl border border-white/10 bg-white shadow-xl shadow-black/30">
+        <div class="flex items-center gap-1.5 border-b border-slate-100 bg-navy px-4 py-2.5">
+          <span class="h-2.5 w-2.5 rounded-full bg-[#E5735A]"></span><span class="h-2.5 w-2.5 rounded-full bg-[#E8C15A]"></span><span class="h-2.5 w-2.5 rounded-full bg-[#59C27A]"></span>
+          <span class="ml-auto text-[10px] font-semibold uppercase tracking-wider text-ice/50">Raseed · Reports</span>
+        </div>
+        <div class="p-5">
+          <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">Spending by category</p>
+          <div class="mt-4 space-y-2.5">
+            <div>
+              <div class="flex justify-between text-xs text-slate-500"><span>Housing</span><span>34%</span></div>
+              <div class="mt-1 h-1.5 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-navy" style="width:34%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs text-slate-500"><span>Groceries</span><span>21%</span></div>
+              <div class="mt-1 h-1.5 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-navy" style="width:21%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs text-slate-500"><span>Transport</span><span>14%</span></div>
+              <div class="mt-1 h-1.5 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-navy" style="width:14%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs text-slate-500"><span>Dining out</span><span>11%</span></div>
+              <div class="mt-1 h-1.5 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-gold" style="width:11%"></div></div>
+            </div>
+          </div>
+        </div>
       </div>
-      <h3 class="mt-4 font-semibold text-slate-900">Install it like an app</h3>
-      <p class="mt-2 text-sm text-slate-600">Add Raseedee to your home screen as a PWA, get optional reminder notifications, and use it fully in English or Arabic.</p>
+      <div class="reveal reveal-delay-2">
+        <h3 class="text-xl font-semibold text-white">Understand where it went</h3>
+        <p class="mt-3 text-sm leading-relaxed text-ice/70">Spending breakdowns, income vs. expenses, and month-over-month trends — without building a single pivot table.</p>
+      </div>
+    </div>
+
+    <!-- Investments -->
+    <div id="investments" class="mt-16 scroll-mt-24 grid items-center gap-10 md:grid-cols-2">
+      <div class="reveal reveal-delay-1 order-2 md:order-1">
+        <h3 class="text-xl font-semibold text-white">Your portfolio, alongside everything else</h3>
+        <p class="mt-3 text-sm leading-relaxed text-ice/70">Stocks, ETFs, mutual funds, bonds, crypto and more — tracked in the same dashboard as your savings, not a separate app.</p>
+      </div>
+      <div class="card-hover reveal reveal-delay-2 order-1 overflow-hidden rounded-2xl border border-white/10 bg-white shadow-xl shadow-black/30 md:order-2">
+        <div class="flex items-center gap-1.5 border-b border-slate-100 bg-navy px-4 py-2.5">
+          <span class="h-2.5 w-2.5 rounded-full bg-[#E5735A]"></span><span class="h-2.5 w-2.5 rounded-full bg-[#E8C15A]"></span><span class="h-2.5 w-2.5 rounded-full bg-[#59C27A]"></span>
+          <span class="ml-auto text-[10px] font-semibold uppercase tracking-wider text-ice/50">Raseed · Investments</span>
+        </div>
+        <div class="p-5">
+          <div class="flex items-center justify-between">
+            <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">Portfolio value</p>
+            <span class="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">+4,003 unrealized</span>
+          </div>
+          <p class="mt-1 text-2xl font-bold text-navy">QAR 61,900</p>
+          <div class="mt-4 space-y-2">
+            <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-3 py-2 text-sm">
+              <span class="text-slate-600">ETFs</span><span class="font-medium text-navy">48%</span>
+            </div>
+            <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-3 py-2 text-sm">
+              <span class="text-slate-600">Stocks</span><span class="font-medium text-navy">31%</span>
+            </div>
+            <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-3 py-2 text-sm">
+              <span class="text-slate-600">Gold &amp; cash</span><span class="font-medium text-navy">21%</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- AI Assistant -->
-<section id="assistant" class="border-y border-slate-100 bg-slate-50/60">
-  <div class="relative mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 md:grid-cols-2">
+<section id="ai" class="scroll-mt-16 mx-auto max-w-6xl px-5 py-20">
+  <div class="relative grid items-center gap-12 md:grid-cols-2">
     <div class="reveal order-2 md:order-1">
-      <span class="inline-flex items-center rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700 ring-1 ring-indigo-200">
+      <span class="inline-flex items-center rounded-full bg-gold/10 px-3 py-1 text-xs font-semibold text-goldlight ring-1 ring-gold/30">
         Built in, no setup
       </span>
-      <h2 class="mt-5 text-2xl font-bold leading-tight tracking-tight text-slate-900 sm:text-3xl">
-        Meet <span class="text-gradient">Penny</span>, your AI assistant
+      <h2 class="mt-5 text-2xl font-bold leading-tight tracking-tight text-white sm:text-3xl">
+        Ask your money <span class="text-gradient">anything.</span>
       </h2>
-      <p class="mt-4 text-slate-600">
-        Penny lives in a chat bubble on every page, so you never have to dig through reports to get an answer. Ask it about your own money in plain English — or Arabic — and it looks at your real transactions and portfolio to reply.
+      <p class="mt-4 text-ice/70">
+        Your AI financial assistant understands your financial history and helps you make sense of it.
       </p>
-      <ul class="mt-6 space-y-3 text-sm text-slate-600">
-        <li class="flex gap-2.5">
-          <span class="mt-0.5 text-indigo-600">✓</span>
-          <span><strong class="text-slate-900">Ask about your spending, any time range.</strong> "How much did I spend on dining last month?" or "What was my savings rate in 2025?" — not just a fixed recent window.</span>
-        </li>
-        <li class="flex gap-2.5">
-          <span class="mt-0.5 text-indigo-600">✓</span>
-          <span><strong class="text-slate-900">Ask about your portfolio.</strong> Holdings, current value, and unrealized gain or loss, computed with the exact same numbers as your Investments tab.</span>
-        </li>
-        <li class="flex gap-2.5">
-          <span class="mt-0.5 text-indigo-600">✓</span>
-          <span><strong class="text-slate-900">Ask "how do I…" questions.</strong> Penny explains the app and can take you straight to the right screen.</span>
-        </li>
-        <li class="flex gap-2.5">
-          <span class="mt-0.5 text-indigo-600">✓</span>
-          <span><strong class="text-slate-900">Private by design.</strong> Penny can only ever see your own account's data — never anyone else's — and doesn't remember the conversation after you close it.</span>
-        </li>
+      <ul class="mt-6 space-y-2.5 text-sm text-ice/70">
+        <li class="flex gap-2.5"><span class="mt-0.5 text-gold">✓</span> "Where did I spend the most this month?"</li>
+        <li class="flex gap-2.5"><span class="mt-0.5 text-gold">✓</span> "Why did my savings rate drop?"</li>
+        <li class="flex gap-2.5"><span class="mt-0.5 text-gold">✓</span> "How much have I spent on restaurants this year?"</li>
+        <li class="flex gap-2.5"><span class="mt-0.5 text-gold">✓</span> "How has my net worth changed over the last six months?"</li>
+        <li class="flex gap-2.5"><span class="mt-0.5 text-gold">✓</span> "Can I afford a QAR 4,000 trip next month?"</li>
       </ul>
+      <p class="mt-6 text-xs italic text-ice/40">Financial analysis and insights — not regulated financial or investment advice.</p>
     </div>
 
-    <!-- Illustrative chat mockup — not a real screenshot -->
-    <div class="card-hover float reveal reveal-delay-2 order-1 mx-auto w-full max-w-sm rounded-2xl border border-slate-200 bg-white p-5 shadow-xl md:order-2">
-      <div class="flex items-center gap-2 border-b border-slate-100 pb-3">
-        <span class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-sm font-bold text-white">P</span>
+    <!-- Interactive-looking chat mockup — not a live embed. Assistant is
+         shown generically (no "Penny" branding) since the in-app assistant
+         is likely to be renamed to something more Gulf/MENA-relevant. -->
+    <div class="card-hover float reveal reveal-delay-2 order-1 mx-auto w-full max-w-sm overflow-hidden rounded-2xl border border-white/10 bg-white shadow-2xl shadow-black/40 md:order-2">
+      <div class="flex items-center gap-2 border-b border-slate-100 bg-navy px-4 py-3">
+        <span class="flex h-7 w-7 items-center justify-center rounded-full bg-gold text-xs font-bold text-navy">AI</span>
         <div>
-          <p class="text-sm font-semibold text-slate-900">Penny</p>
-          <p class="text-[11px] text-slate-400">Your finances, answered</p>
+          <p class="text-sm font-semibold text-white">Financial Assistant</p>
+          <p class="text-[11px] text-ice/50">Your finances, answered</p>
         </div>
       </div>
-      <div class="mt-4 space-y-3">
+      <div class="space-y-3 p-4">
         <div class="max-w-[85%] rounded-2xl rounded-bl-sm bg-slate-100 px-3.5 py-2.5 text-sm text-slate-700">
-          Hi, I'm Penny — ask me anything about your finances 👋
+          Ask me anything about your finances.
         </div>
-        <div class="ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-indigo-600 px-3.5 py-2.5 text-sm text-white">
-          How much did I spend on dining last month?
+        <div class="ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-navy px-3.5 py-2.5 text-sm text-white">
+          Can I afford a QAR 4,000 trip next month?
         </div>
         <div class="max-w-[85%] rounded-2xl rounded-bl-sm bg-slate-100 px-3.5 py-2.5 text-sm text-slate-700">
-          You spent <span class="font-semibold">$284.50</span> on Dining in July, across 11 transactions — about 9% of your total spending that month.
+          Based on your last 3 months, yes — you'd have about <span class="font-semibold">QAR 1,150</span> left while keeping your current savings rate.
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gulf-first -->
+<section class="border-y border-white/10 bg-navy3">
+  <div class="mx-auto max-w-6xl px-5 py-20">
+    <div class="reveal mx-auto max-w-2xl text-center">
+      <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Built around the Gulf, from day one.</h2>
+      <p class="mt-3 text-ice/70">Not a global app with a translation bolted on.</p>
+    </div>
+    <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="reveal reveal-delay-1 rounded-xl border border-white/10 bg-navy2/40 p-5">
+        <p class="font-semibold text-white">English &amp; Arabic</p>
+        <p class="mt-1.5 text-sm text-ice/60">Available in English &amp; Arabic, with RTL support. Arabic localization continues across additional product areas.</p>
+      </div>
+      <div class="reveal reveal-delay-2 rounded-xl border border-white/10 bg-navy2/40 p-5">
+        <p class="font-semibold text-white">GCC currencies</p>
+        <p class="mt-1.5 text-sm text-ice/60">QAR, SAR, AED, KWD, BHD, OMR and more, tracked natively.</p>
+      </div>
+      <div class="reveal reveal-delay-3 rounded-xl border border-white/10 bg-navy2/40 p-5">
+        <p class="font-semibold text-white">Multi-currency households</p>
+        <p class="mt-1.5 text-sm text-ice/60">Built for people who earn, spend and save across more than one currency.</p>
+      </div>
+      <div class="reveal reveal-delay-4 rounded-xl border border-white/10 bg-navy2/40 p-5">
+        <p class="font-semibold text-white">Salaried professionals</p>
+        <p class="mt-1.5 text-sm text-ice/60">Designed around a regular salary, recurring expenses, and building savings over time.</p>
+      </div>
+      <div class="reveal reveal-delay-1 rounded-xl border border-white/10 bg-navy2/40 p-5">
+        <p class="font-semibold text-white">Savings &amp; installments</p>
+        <p class="mt-1.5 text-sm text-ice/60">Track savings goals and installment payoff timelines side by side.</p>
+      </div>
+      <div class="reveal reveal-delay-2 rounded-xl border border-white/10 bg-navy2/40 p-5">
+        <p class="font-semibold text-white">Investment tracking</p>
+        <p class="mt-1.5 text-sm text-ice/60">Regional and global holdings, in the same dashboard as everything else.</p>
+      </div>
+      <div class="reveal reveal-delay-3 rounded-xl border border-white/10 bg-navy2/40 p-5">
+        <p class="font-semibold text-white">Real net worth</p>
+        <p class="mt-1.5 text-sm text-ice/60">One number that combines savings, investments and what you owe.</p>
+      </div>
+      <div class="reveal reveal-delay-4 rounded-xl border border-white/10 bg-navy2/40 p-5">
+        <p class="font-semibold text-white">Regional behavior</p>
+        <p class="mt-1.5 text-sm text-ice/60">Built around how people in the Gulf actually earn, spend and save.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- How it works -->
-<section id="how-it-works" class="border-y border-slate-100 bg-slate-50/60">
-  <div class="mx-auto max-w-6xl px-5 py-20">
-    <div class="reveal mx-auto max-w-2xl text-center">
-      <h2 class="text-2xl font-bold tracking-tight text-slate-900">Set up once, stay on top of it forever</h2>
+<section id="how-it-works" class="scroll-mt-16 mx-auto max-w-6xl px-5 py-20">
+  <div class="reveal mx-auto max-w-2xl text-center">
+    <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Less than two minutes a day.</h2>
+  </div>
+  <div class="mt-12 grid gap-8 md:grid-cols-3">
+    <div class="reveal reveal-delay-1 text-center">
+      <div class="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-gold text-sm font-bold text-navy shadow-md">1</div>
+      <h3 class="mt-4 font-semibold text-white">Set up your financial picture</h3>
+      <p class="mt-2 text-sm text-ice/60">Add income, expenses, savings and accounts.</p>
     </div>
-    <div class="mt-12 grid gap-8 md:grid-cols-3">
-      <div class="reveal reveal-delay-1 text-center">
-        <div class="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-slate-900 to-slate-700 text-sm font-bold text-white shadow-md">1</div>
-        <h3 class="mt-4 font-semibold text-slate-900">Add your fields</h3>
-        <p class="mt-2 text-sm text-slate-600">Create the income and expense fields that match how you actually spend and earn — salary, rent, groceries, side income, whatever fits.</p>
-      </div>
-      <div class="reveal reveal-delay-2 text-center">
-        <div class="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-slate-900 to-slate-700 text-sm font-bold text-white shadow-md">2</div>
-        <h3 class="mt-4 font-semibold text-slate-900">Log as you go</h3>
-        <p class="mt-2 text-sm text-slate-600">Record transactions in seconds, in any currency, with filters by year, month, or custom date range whenever you need to look back.</p>
-      </div>
-      <div class="reveal reveal-delay-3 text-center">
-        <div class="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-slate-900 to-slate-700 text-sm font-bold text-white shadow-md">3</div>
-        <h3 class="mt-4 font-semibold text-slate-900">Watch it add up</h3>
-        <p class="mt-2 text-sm text-slate-600">Your dashboard, savings, and investment portfolio update automatically — one real net worth number, always current.</p>
-      </div>
+    <div class="reveal reveal-delay-2 text-center">
+      <div class="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-gold text-sm font-bold text-navy shadow-md">2</div>
+      <h3 class="mt-4 font-semibold text-white">Log as you go</h3>
+      <p class="mt-2 text-sm text-ice/60">Record transactions quickly throughout the day.</p>
+    </div>
+    <div class="reveal reveal-delay-3 text-center">
+      <div class="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-gold text-sm font-bold text-navy shadow-md">3</div>
+      <h3 class="mt-4 font-semibold text-white">Understand your money</h3>
+      <p class="mt-2 text-sm text-ice/60">See trends, savings, investments and net worth in one dashboard.</p>
     </div>
   </div>
 </section>
 
+<!--
+  Social proof — "Built with real users in Qatar"
+  TODO(Naim): this section is intentionally left commented out. Fill in the
+  real beta metrics and 1-3 genuine testimonials below, then delete the
+  comment markers wrapping this section to publish it. Do not publish with
+  placeholder numbers still showing — that reads as unfinished on a live
+  site.
+
+<section class="border-y border-white/10 bg-navy3">
+  <div class="mx-auto max-w-6xl px-5 py-20">
+    <div class="reveal mx-auto max-w-2xl text-center">
+      <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Built with real users in Qatar</h2>
+    </div>
+    <div class="mt-12 grid gap-6 sm:grid-cols-3">
+      <div class="rounded-xl border border-white/10 bg-navy2/40 p-6 text-center">
+        <p class="text-3xl font-bold text-gold">[BETA USERS]</p>
+        <p class="mt-1 text-sm text-ice/60">Beta users today</p>
+      </div>
+      <div class="rounded-xl border border-white/10 bg-navy2/40 p-6 text-center">
+        <p class="text-3xl font-bold text-gold">[TRANSACTIONS LOGGED]</p>
+        <p class="mt-1 text-sm text-ice/60">Transactions logged</p>
+      </div>
+      <div class="rounded-xl border border-white/10 bg-navy2/40 p-6 text-center">
+        <p class="text-3xl font-bold text-gold">[30-DAY RETENTION]</p>
+        <p class="mt-1 text-sm text-ice/60">30-day retention</p>
+      </div>
+    </div>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      <div class="rounded-xl border border-white/10 bg-navy2/40 p-6">
+        <p class="text-sm text-ice/70">"[Testimonial quote]"</p>
+        <p class="mt-3 text-xs font-semibold text-white">[Name], [Role/City]</p>
+      </div>
+      <div class="rounded-xl border border-white/10 bg-navy2/40 p-6">
+        <p class="text-sm text-ice/70">"[Testimonial quote]"</p>
+        <p class="mt-3 text-xs font-semibold text-white">[Name], [Role/City]</p>
+      </div>
+      <div class="rounded-xl border border-white/10 bg-navy2/40 p-6">
+        <p class="text-sm text-ice/70">"[Testimonial quote]"</p>
+        <p class="mt-3 text-xs font-semibold text-white">[Name], [Role/City]</p>
+      </div>
+    </div>
+  </div>
+</section>
+-->
+
 <!-- Pricing -->
-<section id="pricing" class="mx-auto max-w-6xl px-5 py-20">
+<section id="pricing" class="scroll-mt-16 mx-auto max-w-6xl px-5 py-20">
   <div class="reveal mx-auto max-w-2xl text-center">
-    <h2 class="text-2xl font-bold tracking-tight text-slate-900">Simple pricing</h2>
-    <p class="mt-3 text-slate-600">Start free. Upgrade only when you outgrow it.</p>
+    <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Simple pricing</h2>
+    <p class="mt-3 text-ice/70">Start free. Go deeper when you're ready.</p>
   </div>
 
-  <div class="mt-12 grid gap-6 md:grid-cols-3">
-    <div class="card-hover reveal reveal-delay-1 rounded-2xl border border-slate-200 p-7">
-      <h3 class="font-semibold text-slate-900">Free</h3>
-      <p class="mt-3 text-3xl font-bold text-slate-900">$0</p>
-      <p class="text-sm text-slate-400">forever</p>
-      <ul class="mt-6 space-y-2.5 text-sm text-slate-600">
-        <li class="flex gap-2"><span class="text-emerald-600">✓</span> 1 income field, 10 expense fields</li>
-        <li class="flex gap-2"><span class="text-emerald-600">✓</span> Unlimited transactions</li>
-        <li class="flex gap-2"><span class="text-emerald-600">✓</span> Dashboard &amp; net worth tracking</li>
-        <li class="flex gap-2"><span class="text-emerald-600">✓</span> Savings tracking</li>
-        <li class="flex gap-2"><span class="text-emerald-600">✓</span> Excel export</li>
+  <!--
+    Marketing simplification note: this section presents a simplified
+    Free / Premium (~$4.99) story per the current positioning brief. The
+    live app's actual paid tiers today are Plus ($3.99/mo) and Unlimited
+    ($5.99/mo) — see docs/plans.html and the in-app upgrade flow, which
+    have NOT been changed. "Upgrade to Premium" below links to the real
+    upgrade flow, where the actual current tiers/prices are shown. Treat
+    "~$4.99/mo" as a marketing anchor point, not a live price, until the
+    backend plans are actually consolidated to match.
+  -->
+  <div class="mx-auto mt-12 grid max-w-3xl gap-6 md:grid-cols-2">
+    <div class="card-hover-dark reveal reveal-delay-1 rounded-2xl border border-white/10 bg-navy2/40 p-7">
+      <h3 class="font-semibold text-white">Free</h3>
+      <p class="mt-1 text-sm text-ice/60">Build financial awareness</p>
+      <p class="mt-4 text-3xl font-bold text-white">$0</p>
+      <ul class="mt-6 space-y-2.5 text-sm text-ice/70">
+        <li class="flex gap-2"><span class="text-gold">✓</span> Core transaction tracking</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> Income &amp; expenses</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> Dashboard</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> Savings tracking</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> Basic reports</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> Multi-currency</li>
       </ul>
-      <a href="https://financial-trackerv1.vercel.app" class="mt-7 block rounded-lg border border-slate-300 py-2.5 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50">Get started</a>
+      <a href="https://financial-trackerv1.vercel.app" class="mt-7 block rounded-lg border border-white/20 py-2.5 text-center text-sm font-semibold text-ice hover:bg-white/5">Start Free</a>
     </div>
 
-    <div class="reveal reveal-delay-2 relative rounded-2xl bg-white p-7 shadow-lg">
+    <div class="reveal reveal-delay-2 relative rounded-2xl bg-navy2 p-7">
       <div class="glow-ring" aria-hidden="true"></div>
-      <span class="absolute -top-3 left-7 rounded-full bg-emerald-600 px-3 py-1 text-xs font-semibold text-white">Most popular</span>
-      <h3 class="font-semibold text-slate-900">Plus</h3>
-      <p class="mt-3 text-3xl font-bold text-slate-900">$3.99<span class="text-base font-medium text-slate-400">/mo</span></p>
-      <p class="text-sm text-slate-400">or $39.99/year</p>
-      <ul class="mt-6 space-y-2.5 text-sm text-slate-600">
-        <li class="flex gap-2"><span class="text-emerald-600">✓</span> 2 income fields, 15 expense fields</li>
-        <li class="flex gap-2"><span class="text-emerald-600">✓</span> Everything in Free</li>
-        <li class="flex gap-2"><span class="text-emerald-600">✓</span> More room to model your finances precisely</li>
-        <li class="flex gap-2"><span class="text-emerald-600">✓</span> Investments add-on available</li>
+      <span class="absolute -top-3 left-7 rounded-full bg-gold px-3 py-1 text-xs font-semibold text-navy">Most popular</span>
+      <h3 class="font-semibold text-white">Premium</h3>
+      <p class="mt-1 text-sm text-ice/60">Go deeper into your finances</p>
+      <p class="mt-4 text-3xl font-bold text-white">~$4.99<span class="text-base font-medium text-ice/50">/mo</span></p>
+      <ul class="mt-6 space-y-2.5 text-sm text-ice/70">
+        <li class="flex gap-2"><span class="text-gold">✓</span> Unlimited categories</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> AI assistant</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> Investment tracking</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> Advanced analytics</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> Recurring transaction automation</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> Advanced reports</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> Enhanced financial insights</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> Export functionality</li>
       </ul>
-      <a href="https://financial-trackerv1.vercel.app" class="mt-7 block rounded-lg bg-emerald-600 py-2.5 text-center text-sm font-semibold text-white hover:bg-emerald-700">Upgrade to Plus</a>
-    </div>
-
-    <div class="card-hover reveal reveal-delay-3 rounded-2xl border border-slate-200 p-7">
-      <h3 class="font-semibold text-slate-900">Unlimited</h3>
-      <p class="mt-3 text-3xl font-bold text-slate-900">$5.99<span class="text-base font-medium text-slate-400">/mo</span></p>
-      <p class="text-sm text-slate-400">or $59.99/year</p>
-      <ul class="mt-6 space-y-2.5 text-sm text-slate-600">
-        <li class="flex gap-2"><span class="text-emerald-600">✓</span> No limit on income or expense fields</li>
-        <li class="flex gap-2"><span class="text-emerald-600">✓</span> Everything in Plus</li>
-        <li class="flex gap-2"><span class="text-emerald-600">✓</span> Built for power users and complex finances</li>
-        <li class="flex gap-2"><span class="text-emerald-600">✓</span> Investments add-on available</li>
-      </ul>
-      <a href="https://financial-trackerv1.vercel.app" class="mt-7 block rounded-lg border border-slate-300 py-2.5 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50">Upgrade to Unlimited</a>
+      <a href="https://financial-trackerv1.vercel.app" class="mt-7 block rounded-lg bg-gold py-2.5 text-center text-sm font-semibold text-navy hover:bg-goldlight">Upgrade to Premium</a>
     </div>
   </div>
-  <p class="mt-6 text-center text-xs text-slate-400">Portfolio &amp; investment tracking is available as an add-on on any paid plan. See the <a href="docs/plans.html" class="underline hover:text-slate-600">plans &amp; pricing docs</a> for details.</p>
+  <p class="mt-6 text-center text-xs text-ice/40">See the <a href="docs/plans.html" class="underline hover:text-ice/70">plans &amp; pricing docs</a> for the exact tiers and features available today.</p>
+</section>
+
+<!-- Trust & Security -->
+<section class="border-y border-white/10 bg-navy3">
+  <div class="mx-auto max-w-6xl px-5 py-20">
+    <div class="reveal mx-auto max-w-2xl text-center">
+      <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Your financial data stays yours.</h2>
+    </div>
+    <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="reveal reveal-delay-1 rounded-xl border border-white/10 bg-navy2/40 p-5">
+        <p class="font-semibold text-white">Private by design</p>
+        <p class="mt-1.5 text-sm text-ice/60">Your data is yours — used to run the app, nothing else.</p>
+      </div>
+      <div class="reveal reveal-delay-2 rounded-xl border border-white/10 bg-navy2/40 p-5">
+        <p class="font-semibold text-white">No advertisements</p>
+        <p class="mt-1.5 text-sm text-ice/60">No ads, ever, in a place that holds your financial life.</p>
+      </div>
+      <div class="reveal reveal-delay-3 rounded-xl border border-white/10 bg-navy2/40 p-5">
+        <p class="font-semibold text-white">Never sold</p>
+        <p class="mt-1.5 text-sm text-ice/60">Your financial data is not sold to anyone.</p>
+      </div>
+      <div class="reveal reveal-delay-4 rounded-xl border border-white/10 bg-navy2/40 p-5">
+        <p class="font-semibold text-white">Row-level access controls</p>
+        <p class="mt-1.5 text-sm text-ice/60">Database-level rules restrict every record to its owner.</p>
+      </div>
+      <div class="reveal reveal-delay-1 rounded-xl border border-white/10 bg-navy2/40 p-5">
+        <p class="font-semibold text-white">Secure authentication</p>
+        <p class="mt-1.5 text-sm text-ice/60">Sign-in is handled by a dedicated authentication provider.</p>
+      </div>
+      <div class="reveal reveal-delay-2 rounded-xl border border-white/10 bg-navy2/40 p-5">
+        <p class="font-semibold text-white">Separated by account</p>
+        <p class="mt-1.5 text-sm text-ice/60">Every user's data is isolated from every other user's.</p>
+      </div>
+    </div>
+    <p class="reveal reveal-delay-3 mt-6 text-center text-sm text-ice/60">Export your data to Excel any time — it's always yours to take with you.</p>
+  </div>
 </section>
 
 <!-- CTA -->
-<section class="relative overflow-hidden border-t border-slate-100 bg-gradient-to-br from-slate-900 via-slate-900 to-emerald-950">
-  <div class="blob left-1/4 top-1/2 h-72 w-72 -translate-y-1/2 bg-emerald-500/20" aria-hidden="true"></div>
-  <div class="blob right-1/4 top-1/2 h-64 w-64 -translate-y-1/2 bg-sky-500/10" aria-hidden="true"></div>
+<section class="relative overflow-hidden border-t border-white/10 bg-navy">
+  <div class="blob left-1/4 top-1/2 h-72 w-72 -translate-y-1/2 bg-gold/10" aria-hidden="true"></div>
   <div class="reveal relative mx-auto max-w-4xl px-5 py-16 text-center">
-    <h2 class="text-2xl font-bold tracking-tight text-white">Stop guessing what you're worth.</h2>
-    <p class="mt-3 text-slate-300">Set up your first field in under two minutes — it's free.</p>
-    <a href="https://financial-trackerv1.vercel.app" class="mt-7 inline-block rounded-lg bg-emerald-600 px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-900/40 hover:bg-emerald-500">Get started free</a>
+    <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Stop guessing what you're worth.</h2>
+    <p class="mt-3 text-ice/70">See your spending, savings, investments and net worth in one place.</p>
+    <div class="mt-7 flex flex-wrap justify-center gap-3">
+      <a href="https://financial-trackerv1.vercel.app" class="inline-block rounded-lg bg-gold px-7 py-3 text-sm font-semibold text-navy shadow-lg shadow-black/30 hover:bg-goldlight">Get Started Free</a>
+      <a href="#how-it-works" class="inline-block rounded-lg border border-white/20 px-7 py-3 text-sm font-semibold text-ice hover:bg-white/5">See How It Works</a>
+    </div>
   </div>
 </section>
 
 <!-- Footer -->
-<footer class="mx-auto max-w-6xl px-5 py-12 text-sm text-slate-500">
-  <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
-    <div class="flex items-center gap-2 font-semibold text-slate-700">
-      <span class="flex h-6 w-6 items-center justify-center rounded-md bg-emerald-600 text-white text-xs">$</span>
-      Raseedee
+<footer class="border-t border-white/10 bg-navy3">
+  <div class="mx-auto max-w-6xl px-5 py-14 text-sm text-ice/60">
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
+      <div class="lg:col-span-1">
+        <div class="flex items-center gap-2 font-semibold text-white">
+          <span class="flex h-6 w-6 items-center justify-center rounded-md bg-gold text-navy text-xs">R</span>
+          Raseed
+        </div>
+        <p class="mt-3 text-xs text-ice/40">Personal finance for the Gulf.</p>
+      </div>
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider text-ice/40">Product</p>
+        <ul class="mt-3 space-y-2">
+          <li><a href="#product" class="hover:text-white">Features</a></li>
+          <li><a href="#ai" class="hover:text-white">AI Assistant</a></li>
+          <li><a href="#pricing" class="hover:text-white">Pricing</a></li>
+          <li><a href="#investments" class="hover:text-white">Investments</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider text-ice/40">Company</p>
+        <ul class="mt-3 space-y-2">
+          <li><a href="about.html" class="hover:text-white">About</a></li>
+          <li><a href="#contact" class="hover:text-white">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider text-ice/40">Resources</p>
+        <ul class="mt-3 space-y-2">
+          <li><a href="docs/index.html" class="hover:text-white">Documentation</a></li>
+          <li><a href="docs/faq.html" class="hover:text-white">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider text-ice/40">Legal</p>
+        <ul class="mt-3 space-y-2">
+          <li><a href="https://financial-trackerv1.vercel.app/privacy" class="hover:text-white">Privacy Policy</a></li>
+          <li><a href="https://financial-trackerv1.vercel.app/terms" class="hover:text-white">Terms of Service</a></li>
+        </ul>
+      </div>
     </div>
-    <nav class="flex flex-wrap items-center justify-center gap-6">
-      <a href="#features" class="hover:text-slate-800">Features</a>
-      <a href="#assistant" class="hover:text-slate-800">AI Assistant</a>
-      <a href="#pricing" class="hover:text-slate-800">Pricing</a>
-      <a href="docs/index.html" class="hover:text-slate-800">Docs</a>
-      <a href="mailto:abisaadnaim@gmail.com" class="hover:text-slate-800">Contact</a>
-    </nav>
+    <div id="contact" class="scroll-mt-16 mt-10 border-t border-white/10 pt-8">
+      <!--
+        TODO(Naim): hello@raseedee.com / support@raseedee.com do not exist
+        yet — this domain has no email hosting configured (only the Vercel
+        CNAME/DNS records from the earlier setup). Until you set up email
+        (e.g. Cloudflare Email Routing, Google Workspace, etc.) for
+        raseedee.com, this keeps the working personal address instead of
+        publishing a branded address that would bounce. Swap the mailto
+        below once a domain inbox exists.
+      -->
+      <p>Contact: <a href="mailto:abisaadnaim@gmail.com" class="underline hover:text-white">abisaadnaim@gmail.com</a></p>
+    </div>
+    <p class="mt-8 text-center text-xs text-ice/30">&copy; <span id="year"></span> Raseed. All rights reserved.</p>
   </div>
-  <p class="mt-8 text-center text-xs text-slate-400">&copy; <span id="year"></span> Raseedee. All rights reserved.</p>
 </footer>
 
 <script>document.getElementById("year").textContent = new Date().getFullYear();</script>

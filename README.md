@@ -1,4 +1,4 @@
-# Raseedee — Marketing & Docs Site
+# Raseed — Marketing & Docs Site
 
 A static, framework-free website (plain HTML + Tailwind via CDN) — a landing
 page plus a docs section. No build step, no `npm install` required; just
@@ -46,7 +46,7 @@ This is the fastest path since your app is already on Vercel:
    Other** (no build command needed, since these are static files) → set
    **Output Directory** to `.` (the repo root) → Deploy.
 3. Point a subdomain at it if you'd like, e.g. `www.yourdomain.com` for the
-   marketing site and `app.yourdomain.com` for the actual Raseedee
+   marketing site and `app.yourdomain.com` for the actual Raseed
    app.
 
 ## Deploying anywhere else

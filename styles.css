@@ -1,8 +1,10 @@
-/* Small hand-written extras that Tailwind's CDN utility classes don't cover.
-   Everything else on this site is plain Tailwind utility classes, matching
-   the app's own slate/emerald/sky palette. */
+/* Premium fintech pass: dark navy / gold identity (matches the investor
+   deck), replacing the earlier light slate/emerald theme. Colors are also
+   registered with Tailwind's Play CDN config (see the <script> block in
+   each HTML page) so utility classes like `bg-navy2` / `text-gold` work
+   throughout the markup — this file only holds what utilities can't do. */
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:wght@500;600;700&display=swap");
 
 html {
   scroll-behavior: smooth;
@@ -12,25 +14,28 @@ body {
   font-family: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 
-/* Redesign pass: a richer, multi-color "aurora" wash instead of the
-   original single soft-emerald radial — three overlapping gradients (
-   emerald, sky, violet) at low opacity, so the hero reads as more visually
-   alive without ever competing with the actual headline text on top of
-   it. */
-.hero-glow {
-  background:
-    radial-gradient(50% 55% at 15% 10%, rgba(5, 150, 105, 0.16) 0%, rgba(5, 150, 105, 0) 70%),
-    radial-gradient(45% 50% at 85% 15%, rgba(2, 132, 199, 0.14) 0%, rgba(2, 132, 199, 0) 70%),
-    radial-gradient(55% 60% at 50% 100%, rgba(124, 58, 237, 0.08) 0%, rgba(124, 58, 237, 0) 70%);
+.font-serif-display {
+  font-family: "Newsreader", Georgia, serif;
 }
 
-/* ---- Redesign pass: gradient text, decorative blobs, floating card ------ */
+/* Subtle navy/gold aurora wash instead of the previous emerald/sky/violet
+   one — same technique (three low-opacity radial gradients), recolored so
+   the hero reads as premium dark fintech rather than a generic SaaS site. */
+.hero-glow {
+  background:
+    radial-gradient(55% 55% at 15% 0%, rgba(201, 162, 39, 0.10) 0%, rgba(201, 162, 39, 0) 70%),
+    radial-gradient(50% 55% at 90% 10%, rgba(27, 47, 94, 0.55) 0%, rgba(27, 47, 94, 0) 70%),
+    radial-gradient(60% 60% at 50% 100%, rgba(201, 162, 39, 0.06) 0%, rgba(201, 162, 39, 0) 70%);
+}
+
+/* ---- Gradient text, decorative blobs, floating card ------ */
 
 /* Emphasis word/phrase treatment for headlines — used sparingly (one
    phrase per headline, not whole sentences) so it still reads as a real
-   accent rather than a gimmick. */
+   accent rather than a gimmick. Gold-forward gradient instead of the old
+   emerald/sky/violet one. */
 .text-gradient {
-  background: linear-gradient(120deg, #059669 0%, #0284c7 60%, #7c3aed 100%);
+  background: linear-gradient(120deg, #e4c767 0%, #c9a227 60%, #8a6f1a 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -78,7 +83,7 @@ body {
   position: absolute;
   inset: -2px;
   border-radius: 1.25rem;
-  background: linear-gradient(135deg, #059669, #0284c7, #7c3aed);
+  background: linear-gradient(135deg, #e4c767, #c9a227, #8a6f1a);
   z-index: -1;
   animation: glow-pulse 4s ease-in-out infinite;
 }
@@ -147,6 +152,23 @@ body {
   transform: translateY(-1px) scale(0.99);
 }
 
+/* Dark-surface counterpart of .card-hover — used on the navy background
+   cards (features, screenshots, pricing, security). A soft black spread
+   for depth plus a faint gold-tinted glow on hover, instead of the
+   light-theme's slate shadow which would be invisible against navy. */
+.card-hover-dark {
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 12px 28px -16px rgba(0, 0, 0, 0.55);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.card-hover-dark:hover {
+  transform: translateY(-2px);
+  border-color: rgba(201, 162, 39, 0.35);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05) inset, 0 16px 32px -14px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(201, 162, 39, 0.08);
+}
+.card-hover-dark:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
 .bar {
   transition: height 0.6s ease;
 }
@@ -173,7 +195,7 @@ button {
 }
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid #059669;
+  outline: 2px solid #c9a227;
   outline-offset: 2px;
 }
 a[class*="rounded-lg"][class*="bg-"]:active,
