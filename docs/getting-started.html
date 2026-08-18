@@ -3,6 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- Tells mobile browsers (Chrome/Samsung Internet "force dark", Firefox
+     Android auto-dark) that this page is ALREADY a deliberately dark
+     theme, so they don't algorithmically re-tint its colors. Without this,
+     some mobile browsers repaint bright golds/yellows as muddy brown. -->
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#13224D" />
 <title>Getting Started · Docs</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="../styles.css" />
