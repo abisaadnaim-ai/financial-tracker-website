@@ -62,6 +62,7 @@
         </svg>
       </span>
       <span>Raseedee</span>
+      <span class="rounded-full bg-gold/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-goldlight ring-1 ring-gold/30">Beta</span>
     </a>
     <nav class="hidden items-center gap-8 text-sm font-medium text-ice/70 md:flex">
       <a href="#product" class="hover:text-white">Product</a>
@@ -100,9 +101,14 @@
 
   <div class="relative mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 md:grid-cols-2 md:py-24">
     <div class="reveal">
-      <span class="inline-flex items-center rounded-full bg-gold/10 px-3 py-1 text-xs font-semibold text-goldlight ring-1 ring-gold/30">
-        Built for the Gulf &amp; Middle East
-      </span>
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="inline-flex items-center rounded-full bg-gold/10 px-3 py-1 text-xs font-semibold text-goldlight ring-1 ring-gold/30">
+          Built for the Gulf &amp; Middle East
+        </span>
+        <span class="inline-flex items-center gap-1 rounded-full bg-white/5 px-3 py-1 text-xs font-semibold text-ice/70 ring-1 ring-white/15">
+          <span class="h-1.5 w-1.5 rounded-full bg-gold"></span> Raseedee Beta
+        </span>
+      </div>
       <h1 class="mt-5 text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl">
         Your money, <span class="text-gradient">finally in one place.</span>
       </h1>
@@ -113,10 +119,10 @@
         QAR · SAR · AED · KWD · BHD · OMR · and more
       </p>
       <div class="mt-8 flex flex-wrap gap-3">
-        <a href="https://app.raseedee.com" class="rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-navy shadow-sm hover:bg-goldlight">Get Started Free</a>
+        <a href="https://app.raseedee.com" class="rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-navy shadow-sm hover:bg-goldlight">Join the Free Beta</a>
         <a href="#how-it-works" class="rounded-lg border border-white/20 px-6 py-3 text-sm font-semibold text-ice hover:bg-white/5">See How It Works</a>
       </div>
-      <p class="mt-4 text-xs text-ice/40">No credit card required · Free plan available forever</p>
+      <p class="mt-4 text-xs text-ice/40">Free during Beta · No card required</p>
     </div>
 
     <!-- Product hero visual — a high-fidelity mockup of the actual dashboard
@@ -460,6 +466,20 @@
   </div>
 </section>
 
+<!-- Beta info -->
+<section id="beta" class="scroll-mt-16 border-y border-white/10 bg-navy3">
+  <div class="reveal mx-auto max-w-3xl px-5 py-16 text-center">
+    <span class="inline-flex items-center rounded-full bg-gold/10 px-3 py-1 text-xs font-semibold text-goldlight ring-1 ring-gold/30">Raseedee Beta</span>
+    <h2 class="mt-4 text-2xl font-bold tracking-tight text-white sm:text-3xl">Currently free, while we build.</h2>
+    <p class="mt-4 text-ice/70">
+      Raseedee is currently in Beta and available free of charge while we continue developing and improving the platform. You get access to available Beta features without providing any payment details.
+    </p>
+    <p class="mt-3 text-sm text-ice/50">
+      Features, functionality and availability may evolve during the Beta period. If paid plans are introduced in the future, we'll let you know in advance — and you'll be asked to actively choose a paid plan before any charge occurs. Beta users are never automatically enrolled into a paid subscription.
+    </p>
+  </div>
+</section>
+
 <!--
   Social proof — "Built with real users in Qatar"
   TODO(Naim): this section is intentionally left commented out. Fill in the
@@ -508,17 +528,26 @@
 <!-- Pricing -->
 <section id="pricing" class="scroll-mt-16 mx-auto max-w-6xl px-5 py-20">
   <div class="reveal mx-auto max-w-2xl text-center">
-    <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Simple pricing</h2>
-    <p class="mt-3 text-ice/70">Start free. Upgrade only when you outgrow it.</p>
+    <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Free during Beta</h2>
+    <p class="mt-3 text-ice/70">Every feature below is free to use while Raseedee is in Beta — no card required.</p>
   </div>
 
-  <!-- Real, current tiers — matches supabase/migrations/026 + 029 and the
-       in-app plans table exactly (Free / Plus $3.99 / Unlimited $5.99). -->
-  <div class="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-3">
+  <div class="reveal reveal-delay-1 mx-auto mt-8 max-w-3xl rounded-xl border border-gold/30 bg-gold/5 p-4 text-center text-sm text-ice/70">
+    Nothing is charged today. The tiers below show our planned pricing structure for after the
+    Beta — if we introduce them, you'll be asked to actively choose and confirm a plan before
+    any charge applies.
+  </div>
+
+  <!-- Planned future tiers (post-Beta) — matches supabase/migrations/026 +
+       029 and the in-app plans table exactly (Free / Plus $3.99 / Unlimited
+       $5.99). Not currently billed: there is no checkout flow anywhere in
+       the app (no Stripe/billing SDK), so every CTA below leads to the free
+       Beta sign-up, not a purchase. -->
+  <div class="mx-auto mt-8 grid max-w-5xl gap-6 md:grid-cols-3">
     <div class="card-hover-dark reveal reveal-delay-1 rounded-2xl border border-white/10 bg-navy2/40 p-7">
       <h3 class="font-semibold text-white">Free</h3>
       <p class="mt-4 text-3xl font-bold text-white">$0</p>
-      <p class="text-sm text-ice/50">forever</p>
+      <p class="text-sm text-ice/50">Free during Beta</p>
       <ul class="mt-6 space-y-2.5 text-sm text-ice/70">
         <li class="flex gap-2"><span class="text-gold">✓</span> 1 income field, 10 expense fields</li>
         <li class="flex gap-2"><span class="text-gold">✓</span> Unlimited transactions</li>
@@ -532,33 +561,33 @@
 
     <div class="reveal reveal-delay-2 relative rounded-2xl bg-navy2 p-7">
       <div class="glow-ring" aria-hidden="true"></div>
-      <span class="absolute -top-3 left-7 rounded-full bg-gold px-3 py-1 text-xs font-semibold text-navy">Most popular</span>
+      <span class="absolute -top-3 left-7 rounded-full bg-gold px-3 py-1 text-xs font-semibold text-navy">Planned tier</span>
       <h3 class="font-semibold text-white">Plus</h3>
       <p class="mt-4 text-3xl font-bold text-white">$3.99<span class="text-base font-medium text-ice/50">/mo</span></p>
-      <p class="text-sm text-ice/50">or $39.99/year</p>
+      <p class="text-sm text-ice/50">Planned — free during Beta</p>
       <ul class="mt-6 space-y-2.5 text-sm text-ice/70">
         <li class="flex gap-2"><span class="text-gold">✓</span> 2 income fields, 15 expense fields</li>
         <li class="flex gap-2"><span class="text-gold">✓</span> Everything in Free</li>
         <li class="flex gap-2"><span class="text-gold">✓</span> More room to model your finances precisely</li>
       </ul>
-      <a href="https://app.raseedee.com" class="mt-7 block rounded-lg bg-gold py-2.5 text-center text-sm font-semibold text-navy hover:bg-goldlight">Upgrade to Plus</a>
+      <a href="https://app.raseedee.com" class="mt-7 block rounded-lg bg-gold py-2.5 text-center text-sm font-semibold text-navy hover:bg-goldlight">Join the Free Beta</a>
     </div>
 
     <div class="card-hover-dark reveal reveal-delay-3 rounded-2xl border border-white/10 bg-navy2/40 p-7">
       <h3 class="font-semibold text-white">Unlimited</h3>
       <p class="mt-4 text-3xl font-bold text-white">$5.99<span class="text-base font-medium text-ice/50">/mo</span></p>
-      <p class="text-sm text-ice/50">or $59.99/year</p>
+      <p class="text-sm text-ice/50">Planned — free during Beta</p>
       <ul class="mt-6 space-y-2.5 text-sm text-ice/70">
         <li class="flex gap-2"><span class="text-gold">✓</span> No limit on income or expense fields</li>
         <li class="flex gap-2"><span class="text-gold">✓</span> Everything in Plus</li>
         <li class="flex gap-2"><span class="text-gold">✓</span> Built for power users and complex finances</li>
       </ul>
-      <a href="https://app.raseedee.com" class="mt-7 block rounded-lg border border-white/20 py-2.5 text-center text-sm font-semibold text-ice hover:bg-white/5">Upgrade to Unlimited</a>
+      <a href="https://app.raseedee.com" class="mt-7 block rounded-lg border border-white/20 py-2.5 text-center text-sm font-semibold text-ice hover:bg-white/5">Join the Free Beta</a>
     </div>
   </div>
 
   <div class="mx-auto mt-6 max-w-5xl rounded-xl border border-white/10 bg-navy3 p-5 text-center">
-    <p class="text-sm text-ice/70"><span class="font-semibold text-goldlight">Investments add-on:</span> $0.99/month — track your portfolio's value, gains and allocation over time. Stacks with any plan above.</p>
+    <p class="text-sm text-ice/70"><span class="font-semibold text-goldlight">Investments add-on:</span> planned at $0.99/month post-Beta — track your portfolio's value, gains and allocation over time. Not charged during Beta; contact us for early access.</p>
   </div>
   <p class="mt-6 text-center text-xs text-ice/40">See the <a href="docs/plans.html" class="underline hover:text-ice/70">plans &amp; pricing docs</a> for full details.</p>
 </section>
@@ -619,9 +648,9 @@
       <div class="lg:col-span-1">
         <div class="flex items-center gap-2 font-semibold text-white">
           <span class="flex h-6 w-6 items-center justify-center rounded-md bg-gold text-navy text-xs">R</span>
-          Raseedee
+          Raseedee &middot; Beta
         </div>
-        <p class="mt-3 text-xs text-ice/40">Personal finance for the Gulf.</p>
+        <p class="mt-3 text-xs text-ice/40">Personal finance for the Gulf. Currently a free public Beta.</p>
       </div>
       <div>
         <p class="text-xs font-semibold uppercase tracking-wider text-ice/40">Product</p>
@@ -652,12 +681,14 @@
       <div>
         <p class="text-xs font-semibold uppercase tracking-wider text-ice/40">Legal</p>
         <ul class="mt-3 space-y-2">
-          <li><a href="https://app.raseedee.com/privacy" class="hover:text-white">Privacy Policy</a></li>
-          <li><a href="https://app.raseedee.com/terms" class="hover:text-white">Terms of Service</a></li>
+          <li><a href="https://app.raseedee.com/privacy" class="hover:text-white">Privacy Notice</a></li>
+          <li><a href="https://app.raseedee.com/terms" class="hover:text-white">Terms of Use</a></li>
+          <li><a href="https://app.raseedee.com/cookies" class="hover:text-white">Cookie Notice</a></li>
+          <li><a href="https://app.raseedee.com/delete-account" class="hover:text-white">Delete My Account / Data</a></li>
         </ul>
       </div>
     </div>
-    <p class="mt-10 border-t border-white/10 pt-8 text-center text-xs text-ice/30">&copy; <span id="year"></span> Raseedee. All rights reserved.</p>
+    <p class="mt-10 border-t border-white/10 pt-8 text-center text-xs text-ice/30">Raseedee &middot; Beta &middot; &copy; <span id="year"></span> Raseedee. All rights reserved.</p>
   </div>
 </footer>
 
