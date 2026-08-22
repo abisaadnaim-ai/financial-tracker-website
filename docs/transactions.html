@@ -10,100 +10,110 @@
 <meta name="color-scheme" content="dark" />
 <meta name="theme-color" content="#13224D" />
 <title>Transactions &amp; Fields · Docs</title>
+<link rel="canonical" href="https://www.raseedee.com/docs/transactions.html" />
+<link rel="alternate" hreflang="en" href="https://www.raseedee.com/docs/transactions.html" />
+<link rel="alternate" hreflang="ar" href="https://www.raseedee.com/docs/transactions.html" />
+<link rel="alternate" hreflang="x-default" href="https://www.raseedee.com/docs/transactions.html" />
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="../i18n.js"></script>
 <link rel="stylesheet" href="../styles.css" />
 <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
 <link rel="icon" href="../favicon.ico" sizes="any" />
 <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
 </head>
-<body class="bg-white text-slate-900 antialiased">
+<body class="bg-white text-slate-900 antialiased" data-page="transactionsDoc">
 
 <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
     <a href="../index.html" class="flex items-center gap-2 font-bold text-slate-900">
       <span class="flex h-8 w-8 items-center justify-center rounded-lg shadow-sm" style="background:#C9A227"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#13224D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" /><polyline points="16 7 22 7 22 13" /></svg></span>
       <span>Raseedee</span>
-      <span class="rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-700 ring-1 ring-amber-300">Beta</span>
+      <span class="rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-700 ring-1 ring-amber-300" data-i18n="nav.betaBadge">Beta</span>
     </a>
     <nav class="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
-      <a href="../index.html#product" class="hover:text-slate-900">Features</a>
-      <a href="../index.html#pricing" class="hover:text-slate-900">Pricing</a>
-      <a href="index.html" class="text-slate-900">Docs</a>
+      <a href="../index.html#product" class="hover:text-slate-900" data-i18n="nav.features">Features</a>
+      <a href="../index.html#pricing" class="hover:text-slate-900" data-i18n="nav.pricing">Pricing</a>
+      <a href="index.html" class="text-slate-900" data-i18n="nav.docsShort">Docs</a>
     </nav>
-    <a href="https://app.raseedee.com" class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">Get started free</a>
+    <div class="flex items-center gap-3">
+      <div class="flex items-center gap-0.5 rounded-full border border-slate-200 px-1 py-1 text-xs text-slate-500">
+        <button type="button" data-lang-switch="en" class="rounded-full px-2 py-1 transition hover:text-slate-900">EN</button>
+        <button type="button" data-lang-switch="ar" class="rounded-full px-2 py-1 transition hover:text-slate-900">العربية</button>
+      </div>
+      <a href="https://app.raseedee.com" class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800" data-i18n="nav.getStartedLower">Get started free</a>
+    </div>
   </div>
 </header>
 
 <div class="mx-auto flex max-w-6xl gap-10 px-5 py-12">
   <aside class="hidden w-52 shrink-0 md:block">
     <nav class="sticky top-24 space-y-1 text-sm">
-      <a href="getting-started.html" class="block rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-50">Getting started</a>
-      <a href="transactions.html" class="block rounded-lg bg-emerald-50 px-3 py-2 font-semibold text-emerald-700">Transactions &amp; fields</a>
-      <a href="investments.html" class="block rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-50">Investments &amp; portfolio</a>
-      <a href="plans.html" class="block rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-50">Plans &amp; pricing</a>
-      <a href="faq.html" class="block rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-50">FAQ</a>
+      <a href="getting-started.html" class="block rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-50" data-i18n="docsSidebar.gettingStarted">Getting started</a>
+      <a href="transactions.html" class="block rounded-lg bg-emerald-50 px-3 py-2 font-semibold text-emerald-700" data-i18n-html="docsSidebar.transactions">Transactions &amp; fields</a>
+      <a href="investments.html" class="block rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-50" data-i18n-html="docsSidebar.investments">Investments &amp; portfolio</a>
+      <a href="plans.html" class="block rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-50" data-i18n-html="docsSidebar.plans">Plans &amp; pricing</a>
+      <a href="faq.html" class="block rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-50" data-i18n="docsSidebar.faq">FAQ</a>
     </nav>
   </aside>
 
   <main class="min-w-0 flex-1 pb-20">
     <div class="reveal">
-      <h1 class="text-2xl font-bold tracking-tight text-slate-900">Transactions &amp; fields</h1>
-      <p class="mt-3 text-slate-600">The core of Raseedee: your own fields, logged as transactions, filtered however you need.</p>
+      <h1 class="text-2xl font-bold tracking-tight text-slate-900" data-i18n-html="transactionsDoc.title">Transactions &amp; fields</h1>
+      <p class="mt-3 text-slate-600" data-i18n="transactionsDoc.subtitle">The core of Raseedee: your own fields, logged as transactions, filtered however you need.</p>
     </div>
 
     <div class="mt-8 space-y-10">
       <section class="reveal">
-        <h2 class="text-lg font-semibold text-slate-900">Custom fields</h2>
-        <p class="mt-2 text-sm leading-relaxed text-slate-600">A field is a category you define — "Salary," "Rent," "Dining out," anything. Each field has a direction (income or expense) and a category:</p>
+        <h2 class="text-lg font-semibold text-slate-900" data-i18n="transactionsDoc.s1Title">Custom fields</h2>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600" data-i18n="transactionsDoc.s1Body">A field is a category you define — "Salary," "Rent," "Dining out," anything. Each field has a direction (income or expense) and a category:</p>
         <ul class="mt-3 space-y-1.5 text-sm text-slate-600">
-          <li>• <strong>Expense fields</strong> are tagged <strong>Needs</strong> or <strong>Wants</strong>.</li>
-          <li>• <strong>Income fields</strong> are tagged <strong>Revenue</strong>, <strong>Saving</strong>, or <strong>Investment</strong>.</li>
+          <li>• <span data-i18n-html="transactionsDoc.s1Li1"><strong>Expense fields</strong> are tagged <strong>Needs</strong> or <strong>Wants</strong>.</span></li>
+          <li>• <span data-i18n-html="transactionsDoc.s1Li2"><strong>Income fields</strong> are tagged <strong>Revenue</strong>, <strong>Saving</strong>, or <strong>Investment</strong>.</span></li>
         </ul>
-        <p class="mt-3 text-sm leading-relaxed text-slate-600">This tagging is what powers your Reports and Dashboard breakdowns — it costs a few seconds up front and saves you from re-categorizing everything later.</p>
+        <p class="mt-3 text-sm leading-relaxed text-slate-600" data-i18n="transactionsDoc.s1Footer">This tagging is what powers your Reports and Dashboard breakdowns — it costs a few seconds up front and saves you from re-categorizing everything later.</p>
       </section>
 
       <section class="reveal">
-        <h2 class="text-lg font-semibold text-slate-900">Savings — a built-in field</h2>
-        <p class="mt-2 text-sm leading-relaxed text-slate-600">Savings is a protected, system-managed field available to every account by default — you don't create it yourself. Log a deposit as a normal positive transaction on the Savings field; to withdraw, log a <em>negative</em> amount on the same field. Your Savings balance and Dashboard net worth update immediately either way.</p>
+        <h2 class="text-lg font-semibold text-slate-900" data-i18n="transactionsDoc.s2Title">Savings — a built-in field</h2>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600" data-i18n-html="transactionsDoc.s2Body">Savings is a protected, system-managed field available to every account by default — you don't create it yourself. Log a deposit as a normal positive transaction on the Savings field; to withdraw, log a <em>negative</em> amount on the same field. Your Savings balance and Dashboard net worth update immediately either way.</p>
       </section>
 
       <section class="reveal">
-        <h2 class="text-lg font-semibold text-slate-900">Refunds, reimbursements, and corrections</h2>
-        <p class="mt-2 text-sm leading-relaxed text-slate-600">Any field accepts a negative amount, not just Savings. Paid for a car repair and got reimbursed later? Log the reimbursement as a negative amount on the same expense field — it nets against your spending there instead of getting miscategorized as income. The same works for a mistaken entry you want to reverse.</p>
+        <h2 class="text-lg font-semibold text-slate-900" data-i18n="transactionsDoc.s3Title">Refunds, reimbursements, and corrections</h2>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600" data-i18n="transactionsDoc.s3Body">Any field accepts a negative amount, not just Savings. Paid for a car repair and got reimbursed later? Log the reimbursement as a negative amount on the same expense field — it nets against your spending there instead of getting miscategorized as income. The same works for a mistaken entry you want to reverse.</p>
       </section>
 
       <section class="reveal">
-        <h2 class="text-lg font-semibold text-slate-900">Undo last 3 deletions</h2>
-        <p class="mt-2 text-sm leading-relaxed text-slate-600">Deleted a transaction by mistake? A temporary Undo bar appears after any deletion, covering your last three — one click restores the exact original entry.</p>
+        <h2 class="text-lg font-semibold text-slate-900" data-i18n="transactionsDoc.s4Title">Undo last 3 deletions</h2>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600" data-i18n="transactionsDoc.s4Body">Deleted a transaction by mistake? A temporary Undo bar appears after any deletion, covering your last three — one click restores the exact original entry.</p>
       </section>
 
       <section class="reveal">
-        <h2 class="text-lg font-semibold text-slate-900">Filtering &amp; export</h2>
-        <p class="mt-2 text-sm leading-relaxed text-slate-600">Filter your transaction log by year, month, or a custom date range, and exclude transactions with "no balance impact" when you just want to see what actually moved your money. Export the filtered log to Excel at any time.</p>
+        <h2 class="text-lg font-semibold text-slate-900" data-i18n-html="transactionsDoc.s5Title">Filtering &amp; export</h2>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600" data-i18n="transactionsDoc.s5Body">Filter your transaction log by year, month, or a custom date range, and exclude transactions with "no balance impact" when you just want to see what actually moved your money. Export the filtered log to Excel at any time.</p>
       </section>
     </div>
 
     <div class="mt-12 rounded-xl border border-slate-200 bg-slate-50 p-6">
-      <p class="text-sm font-semibold text-slate-900">Next up</p>
-      <p class="mt-1 text-sm text-slate-600">See how asset tracking works in <a href="investments.html" class="text-emerald-700 underline">Investments &amp; portfolio →</a></p>
+      <p class="text-sm font-semibold text-slate-900" data-i18n="transactionsDoc.nextUpLabel">Next up</p>
+      <p class="mt-1 text-sm text-slate-600" data-i18n-html="transactionsDoc.nextUpLink">See how asset tracking works in <a href="investments.html" class="text-emerald-700 underline">Investments &amp; portfolio →</a></p>
     </div>
   </main>
 </div>
 
 <footer class="border-t border-slate-100 py-8 text-center text-xs text-slate-400">
-  <p class="mb-2">Contact: <a href="mailto:support@raseedee.com" class="underline hover:text-slate-600">support@raseedee.com</a></p>
+  <p class="mb-2"><span data-i18n="footer.contact">Contact</span>: <a href="mailto:support@raseedee.com" class="underline hover:text-slate-600" dir="ltr">support@raseedee.com</a></p>
   <p class="mb-2">
-    <a href="https://app.raseedee.com/privacy" class="underline hover:text-slate-600">Privacy Notice</a>
+    <a href="https://app.raseedee.com/privacy" class="underline hover:text-slate-600" data-i18n="footer.privacy">Privacy Notice</a>
     <span class="mx-2">&middot;</span>
-    <a href="https://app.raseedee.com/terms" class="underline hover:text-slate-600">Terms of Use</a>
+    <a href="https://app.raseedee.com/terms" class="underline hover:text-slate-600" data-i18n="footer.terms">Terms of Use</a>
     <span class="mx-2">&middot;</span>
-    <a href="https://app.raseedee.com/cookies" class="underline hover:text-slate-600">Cookie Notice</a>
+    <a href="https://app.raseedee.com/cookies" class="underline hover:text-slate-600" data-i18n="footer.cookies">Cookie Notice</a>
     <span class="mx-2">&middot;</span>
-    <a href="https://app.raseedee.com/delete-account" class="underline hover:text-slate-600">Delete My Account / Data</a>
+    <a href="https://app.raseedee.com/delete-account" class="underline hover:text-slate-600" data-i18n="footer.deleteAccount">Delete My Account / Data</a>
   </p>
-  Raseedee &middot; Beta &middot; &copy; <span id="year"></span> Raseedee. All rights reserved.
+  <span data-i18n-year="footer.copyright">Raseedee &middot; Beta &middot; &copy; 2026 Raseedee. All rights reserved.</span>
 </footer>
-<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 <script src="../script.js" defer></script>
 </body>
 </html>

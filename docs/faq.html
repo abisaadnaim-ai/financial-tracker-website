@@ -10,118 +10,128 @@
 <meta name="color-scheme" content="dark" />
 <meta name="theme-color" content="#13224D" />
 <title>FAQ · Docs</title>
+<link rel="canonical" href="https://www.raseedee.com/docs/faq.html" />
+<link rel="alternate" hreflang="en" href="https://www.raseedee.com/docs/faq.html" />
+<link rel="alternate" hreflang="ar" href="https://www.raseedee.com/docs/faq.html" />
+<link rel="alternate" hreflang="x-default" href="https://www.raseedee.com/docs/faq.html" />
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="../i18n.js"></script>
 <link rel="stylesheet" href="../styles.css" />
 <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
 <link rel="icon" href="../favicon.ico" sizes="any" />
 <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
 </head>
-<body class="bg-white text-slate-900 antialiased">
+<body class="bg-white text-slate-900 antialiased" data-page="faq">
 
 <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
     <a href="../index.html" class="flex items-center gap-2 font-bold text-slate-900">
       <span class="flex h-8 w-8 items-center justify-center rounded-lg shadow-sm" style="background:#C9A227"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#13224D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" /><polyline points="16 7 22 7 22 13" /></svg></span>
       <span>Raseedee</span>
-      <span class="rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-700 ring-1 ring-amber-300">Beta</span>
+      <span class="rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-700 ring-1 ring-amber-300" data-i18n="nav.betaBadge">Beta</span>
     </a>
     <nav class="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
-      <a href="../index.html#product" class="hover:text-slate-900">Features</a>
-      <a href="../index.html#pricing" class="hover:text-slate-900">Pricing</a>
-      <a href="index.html" class="text-slate-900">Docs</a>
+      <a href="../index.html#product" class="hover:text-slate-900" data-i18n="nav.features">Features</a>
+      <a href="../index.html#pricing" class="hover:text-slate-900" data-i18n="nav.pricing">Pricing</a>
+      <a href="index.html" class="text-slate-900" data-i18n="nav.docsShort">Docs</a>
     </nav>
-    <a href="https://app.raseedee.com" class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">Get started free</a>
+    <div class="flex items-center gap-3">
+      <div class="flex items-center gap-0.5 rounded-full border border-slate-200 px-1 py-1 text-xs text-slate-500">
+        <button type="button" data-lang-switch="en" class="rounded-full px-2 py-1 transition hover:text-slate-900">EN</button>
+        <button type="button" data-lang-switch="ar" class="rounded-full px-2 py-1 transition hover:text-slate-900">العربية</button>
+      </div>
+      <a href="https://app.raseedee.com" class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800" data-i18n="nav.getStartedLower">Get started free</a>
+    </div>
   </div>
 </header>
 
 <div class="mx-auto flex max-w-6xl gap-10 px-5 py-12">
   <aside class="hidden w-52 shrink-0 md:block">
     <nav class="sticky top-24 space-y-1 text-sm">
-      <a href="getting-started.html" class="block rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-50">Getting started</a>
-      <a href="transactions.html" class="block rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-50">Transactions &amp; fields</a>
-      <a href="investments.html" class="block rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-50">Investments &amp; portfolio</a>
-      <a href="plans.html" class="block rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-50">Plans &amp; pricing</a>
-      <a href="faq.html" class="block rounded-lg bg-emerald-50 px-3 py-2 font-semibold text-emerald-700">FAQ</a>
+      <a href="getting-started.html" class="block rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-50" data-i18n="docsSidebar.gettingStarted">Getting started</a>
+      <a href="transactions.html" class="block rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-50" data-i18n-html="docsSidebar.transactions">Transactions &amp; fields</a>
+      <a href="investments.html" class="block rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-50" data-i18n-html="docsSidebar.investments">Investments &amp; portfolio</a>
+      <a href="plans.html" class="block rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-50" data-i18n-html="docsSidebar.plans">Plans &amp; pricing</a>
+      <a href="faq.html" class="block rounded-lg bg-emerald-50 px-3 py-2 font-semibold text-emerald-700" data-i18n="docsSidebar.faq">FAQ</a>
     </nav>
   </aside>
 
   <main class="min-w-0 flex-1 pb-20">
     <div class="reveal">
-      <h1 class="text-2xl font-bold tracking-tight text-slate-900">Frequently asked questions</h1>
+      <h1 class="text-2xl font-bold tracking-tight text-slate-900" data-i18n="faq.title">Frequently asked questions</h1>
     </div>
 
     <div class="mt-8 divide-y divide-slate-100 rounded-xl border border-slate-200 reveal reveal-delay-1">
       <details class="group p-5">
-        <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none">
+        <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none" data-i18n="faq.q1">
           Can I track more than one currency?
         </summary>
-        <p class="mt-2 text-sm leading-relaxed text-slate-600">Yes. Set a preferred currency in your profile for day-to-day totals, then hold assets or log transactions in any other currency — Raseedee converts and consolidates automatically wherever it shows a combined total.</p>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600" data-i18n="faq.a1">Yes. Set a preferred currency in your profile for day-to-day totals, then hold assets or log transactions in any other currency — Raseedee converts and consolidates automatically wherever it shows a combined total.</p>
       </details>
       <details class="group p-5">
-        <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none">
+        <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none" data-i18n="faq.q2">
           How do refunds and reimbursements work?
         </summary>
-        <p class="mt-2 text-sm leading-relaxed text-slate-600">Log them as a negative amount on the same field the original expense used. It nets against that field's total instead of getting counted as separate income, so your category totals stay accurate.</p>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600" data-i18n="faq.a2">Log them as a negative amount on the same field the original expense used. It nets against that field's total instead of getting counted as separate income, so your category totals stay accurate.</p>
       </details>
       <details class="group p-5">
-        <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none">
+        <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none" data-i18n="faq.q3">
           I deleted a transaction by mistake — can I get it back?
         </summary>
-        <p class="mt-2 text-sm leading-relaxed text-slate-600">Yes, for your last three deletions. An Undo bar appears right after you delete something; click it to restore the exact entry.</p>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600" data-i18n="faq.a3">Yes, for your last three deletions. An Undo bar appears right after you delete something; click it to restore the exact entry.</p>
       </details>
       <details class="group p-5">
-        <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none">
+        <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none" data-i18n="faq.q4">
           What's the difference between Savings and Investments?
         </summary>
-        <p class="mt-2 text-sm leading-relaxed text-slate-600">Savings is a simple built-in field for cash you're setting aside — no setup required. Investments is a separate add-on module for tracking priced assets (stocks, funds, crypto, and more) with cost basis and gain/loss. Both feed into your overall net worth on the Dashboard, and your Savings balance also appears alongside cash holdings on the Portfolio tab.</p>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600" data-i18n="faq.a4">Savings is a simple built-in field for cash you're setting aside — no setup required. Investments is a separate add-on module for tracking priced assets (stocks, funds, crypto, and more) with cost basis and gain/loss. Both feed into your overall net worth on the Dashboard, and your Savings balance also appears alongside cash holdings on the Portfolio tab.</p>
       </details>
       <details class="group p-5">
-        <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none">
+        <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none" data-i18n="faq.q5">
           Can I install this on my phone?
         </summary>
-        <p class="mt-2 text-sm leading-relaxed text-slate-600">Yes — it's a Progressive Web App. Open it in your mobile browser and choose "Add to Home Screen" to use it like a native app, with optional reminder notifications.</p>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600" data-i18n="faq.a5">Yes — it's a Progressive Web App. Open it in your mobile browser and choose "Add to Home Screen" to use it like a native app, with optional reminder notifications.</p>
       </details>
       <details class="group p-5">
-        <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none">
+        <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none" data-i18n="faq.q6">
           Is the app available in languages other than English?
         </summary>
-        <p class="mt-2 text-sm leading-relaxed text-slate-600">Yes, the core app supports English and Arabic. (The Investments module and admin tools are currently English-only.)</p>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600" data-i18n="faq.a6">Yes, the core app supports English and Arabic. (The Investments module and admin tools are currently English-only.)</p>
       </details>
       <details class="group p-5">
-        <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none">
+        <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none" data-i18n="faq.q7">
           Can I export my data?
         </summary>
-        <p class="mt-2 text-sm leading-relaxed text-slate-600">Yes. Your transaction log, investment activity, and dashboard summary can each be exported to Excel at any time, filtered by whatever date range or view you're currently looking at.</p>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600" data-i18n="faq.a7">Yes. Your transaction log, investment activity, and dashboard summary can each be exported to Excel at any time, filtered by whatever date range or view you're currently looking at.</p>
       </details>
       <details class="group p-5">
-        <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none">
+        <summary class="cursor-pointer list-none font-semibold text-slate-900 marker:content-none" data-i18n="faq.q8">
           What happens to my data if I downgrade or cancel?
         </summary>
-        <p class="mt-2 text-sm leading-relaxed text-slate-600">Your fields, transactions, and history are never deleted by a plan change. If a downgrade would put you over a new, lower field limit, you'll be asked to deactivate the extra fields yourself rather than having any of them removed automatically.</p>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600" data-i18n="faq.a8">Your fields, transactions, and history are never deleted by a plan change. If a downgrade would put you over a new, lower field limit, you'll be asked to deactivate the extra fields yourself rather than having any of them removed automatically.</p>
       </details>
     </div>
 
     <div class="mt-10 rounded-xl border border-slate-200 bg-slate-50 p-6">
-      <p class="text-sm font-semibold text-slate-900">Still have a question?</p>
-      <p class="mt-1 text-sm text-slate-600">Reach out at <a href="mailto:support@raseedee.com" class="text-emerald-700 underline">support@raseedee.com</a>.</p>
+      <p class="text-sm font-semibold text-slate-900" data-i18n="faq.stillHaveQuestion">Still have a question?</p>
+      <p class="mt-1 text-sm text-slate-600" data-i18n-html="faq.reachOut">Reach out at <a href="mailto:support@raseedee.com" class="text-emerald-700 underline">support@raseedee.com</a>.</p>
     </div>
   </main>
 </div>
 
 <footer class="border-t border-slate-100 py-8 text-center text-xs text-slate-400">
-  <p class="mb-2">Contact: <a href="mailto:support@raseedee.com" class="underline hover:text-slate-600">support@raseedee.com</a></p>
+  <p class="mb-2"><span data-i18n="footer.contact">Contact</span>: <a href="mailto:support@raseedee.com" class="underline hover:text-slate-600" dir="ltr">support@raseedee.com</a></p>
   <p class="mb-2">
-    <a href="https://app.raseedee.com/privacy" class="underline hover:text-slate-600">Privacy Notice</a>
+    <a href="https://app.raseedee.com/privacy" class="underline hover:text-slate-600" data-i18n="footer.privacy">Privacy Notice</a>
     <span class="mx-2">&middot;</span>
-    <a href="https://app.raseedee.com/terms" class="underline hover:text-slate-600">Terms of Use</a>
+    <a href="https://app.raseedee.com/terms" class="underline hover:text-slate-600" data-i18n="footer.terms">Terms of Use</a>
     <span class="mx-2">&middot;</span>
-    <a href="https://app.raseedee.com/cookies" class="underline hover:text-slate-600">Cookie Notice</a>
+    <a href="https://app.raseedee.com/cookies" class="underline hover:text-slate-600" data-i18n="footer.cookies">Cookie Notice</a>
     <span class="mx-2">&middot;</span>
-    <a href="https://app.raseedee.com/delete-account" class="underline hover:text-slate-600">Delete My Account / Data</a>
+    <a href="https://app.raseedee.com/delete-account" class="underline hover:text-slate-600" data-i18n="footer.deleteAccount">Delete My Account / Data</a>
   </p>
-  Raseedee &middot; Beta &middot; &copy; <span id="year"></span> Raseedee. All rights reserved.
+  <span data-i18n-year="footer.copyright">Raseedee &middot; Beta &middot; &copy; 2026 Raseedee. All rights reserved.</span>
 </footer>
-<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 <script src="../script.js" defer></script>
 </body>
 </html>

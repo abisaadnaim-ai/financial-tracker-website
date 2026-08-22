@@ -12,6 +12,13 @@
 <title>Raseedee — Personal Finance for the Gulf</title>
 <meta name="description" content="Track spending, savings, investments and net worth in one bilingual personal finance app built for the Gulf and Middle East." />
 <link rel="canonical" href="https://www.raseedee.com/" />
+<!-- No per-language URLs exist yet (single static route serves both
+     languages via client-side i18n.js), so hreflang can only self-reference
+     for now rather than truly point at distinct EN/AR documents — see the
+     bilingual-launch report for this known limitation. -->
+<link rel="alternate" hreflang="en" href="https://www.raseedee.com/" />
+<link rel="alternate" hreflang="ar" href="https://www.raseedee.com/" />
+<link rel="alternate" hreflang="x-default" href="https://www.raseedee.com/" />
 
 <!-- OpenGraph / social preview -->
 <meta property="og:type" content="website" />
@@ -44,12 +51,17 @@
     },
   };
 </script>
+<!-- Bilingual (EN/AR) engine — see i18n.js's own top comment for the full
+     design. Loaded in <head>, before first paint, so <html lang/dir> (and
+     therefore the whole page's RTL layout) is correct immediately instead
+     of flashing LTR-then-RTL for Arabic-default visitors. -->
+<script src="i18n.js"></script>
 <link rel="stylesheet" href="styles.css" />
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <link rel="icon" href="favicon.ico" sizes="any" />
 <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 </head>
-<body class="bg-navy text-ice antialiased">
+<body class="bg-navy text-ice antialiased" data-page="index">
 
 <!-- Nav -->
 <header class="sticky top-0 z-50 border-b border-white/10 bg-navy/90 backdrop-blur">
@@ -62,19 +74,23 @@
         </svg>
       </span>
       <span>Raseedee</span>
-      <span class="rounded-full bg-gold/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-goldlight ring-1 ring-gold/30">Beta</span>
+      <span class="rounded-full bg-gold/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-goldlight ring-1 ring-gold/30" data-i18n="nav.betaBadge">Beta</span>
     </a>
     <nav class="hidden items-center gap-8 text-sm font-medium text-ice/70 md:flex">
-      <a href="#product" class="hover:text-white">Product</a>
-      <a href="#ai" class="hover:text-white">AI</a>
-      <a href="#investments" class="hover:text-white">Investments</a>
-      <a href="#pricing" class="hover:text-white">Pricing</a>
-      <a href="about.html" class="hover:text-white">About</a>
+      <a href="#product" class="hover:text-white" data-i18n="nav.product">Product</a>
+      <a href="#ai" class="hover:text-white" data-i18n="nav.ai">AI</a>
+      <a href="#investments" class="hover:text-white" data-i18n="nav.investments">Investments</a>
+      <a href="#pricing" class="hover:text-white" data-i18n="nav.pricing">Pricing</a>
+      <a href="about.html" class="hover:text-white" data-i18n="nav.about">About</a>
     </nav>
     <div class="flex items-center gap-3">
-      <a href="https://app.raseedee.com" class="hidden text-sm font-medium text-ice/70 hover:text-white sm:block">Log in</a>
-      <a href="https://app.raseedee.com" class="rounded-lg bg-gold px-4 py-2 text-sm font-semibold text-navy hover:bg-goldlight">Get Started Free</a>
-      <button id="mobile-nav-toggle" class="flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 text-ice md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <div class="hidden items-center gap-0.5 rounded-full border border-white/15 px-1 py-1 text-xs text-ice/60 sm:flex">
+        <button type="button" data-lang-switch="en" class="rounded-full px-2 py-1 transition hover:text-white">EN</button>
+        <button type="button" data-lang-switch="ar" class="rounded-full px-2 py-1 transition hover:text-white">العربية</button>
+      </div>
+      <a href="https://app.raseedee.com" class="hidden text-sm font-medium text-ice/70 hover:text-white sm:block" data-i18n="nav.login">Log in</a>
+      <a href="https://app.raseedee.com" class="rounded-lg bg-gold px-4 py-2 text-sm font-semibold text-navy hover:bg-goldlight" data-i18n="nav.getStarted">Get Started Free</a>
+      <button id="mobile-nav-toggle" class="flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 text-ice md:hidden" data-i18n-aria="nav.openMenu" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
     </div>
@@ -83,77 +99,85 @@
        styles.css for the #mobile-nav:not(.open){display:none} rule. -->
   <nav id="mobile-nav" class="border-t border-white/10 bg-navy px-5 py-4 md:hidden">
     <div class="flex flex-col gap-4 text-sm font-medium text-ice/80">
-      <a href="#product" class="py-1">Product</a>
-      <a href="#ai" class="py-1">AI</a>
-      <a href="#investments" class="py-1">Investments</a>
-      <a href="#pricing" class="py-1">Pricing</a>
-      <a href="about.html" class="py-1">About</a>
-      <a href="docs/index.html" class="py-1">Documentation</a>
-      <a href="https://app.raseedee.com" class="py-1">Log in</a>
+      <a href="#product" class="py-1" data-i18n="nav.product">Product</a>
+      <a href="#ai" class="py-1" data-i18n="nav.ai">AI</a>
+      <a href="#investments" class="py-1" data-i18n="nav.investments">Investments</a>
+      <a href="#pricing" class="py-1" data-i18n="nav.pricing">Pricing</a>
+      <a href="about.html" class="py-1" data-i18n="nav.about">About</a>
+      <a href="docs/index.html" class="py-1" data-i18n="nav.docs">Documentation</a>
+      <a href="https://app.raseedee.com" class="py-1" data-i18n="nav.login">Log in</a>
+      <div class="flex items-center gap-2 border-t border-white/10 pt-4 text-xs text-ice/60">
+        <button type="button" data-lang-switch="en" class="rounded-full border border-white/15 px-2.5 py-1 transition">EN</button>
+        <button type="button" data-lang-switch="ar" class="rounded-full border border-white/15 px-2.5 py-1 transition">العربية</button>
+      </div>
     </div>
   </nav>
 </header>
 
 <!-- Hero -->
 <section class="hero-glow relative overflow-hidden border-b border-white/10">
-  <div class="blob -left-24 -top-24 h-72 w-72 bg-gold/10" aria-hidden="true"></div>
-  <div class="blob -right-16 top-10 h-64 w-64 bg-navy2/60" aria-hidden="true"></div>
+  <div class="blob -start-24 -top-24 h-72 w-72 bg-gold/10" aria-hidden="true"></div>
+  <div class="blob -end-16 top-10 h-64 w-64 bg-navy2/60" aria-hidden="true"></div>
 
   <div class="relative mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 md:grid-cols-2 md:py-24">
     <div class="reveal">
       <div class="flex flex-wrap items-center gap-2">
-        <span class="inline-flex items-center rounded-full bg-gold/10 px-3 py-1 text-xs font-semibold text-goldlight ring-1 ring-gold/30">
+        <span class="inline-flex items-center rounded-full bg-gold/10 px-3 py-1 text-xs font-semibold text-goldlight ring-1 ring-gold/30" data-i18n="index.heroBadge1">
           Built for the Gulf &amp; Middle East
         </span>
         <span class="inline-flex items-center gap-1 rounded-full bg-white/5 px-3 py-1 text-xs font-semibold text-ice/70 ring-1 ring-white/15">
-          <span class="h-1.5 w-1.5 rounded-full bg-gold"></span> Raseedee Beta
+          <span class="h-1.5 w-1.5 rounded-full bg-gold"></span> <span data-i18n="index.heroBadge2">Raseedee Beta</span>
         </span>
       </div>
-      <h1 class="mt-5 text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl">
+      <h1 class="mt-5 text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl" data-i18n-html="index.heroTitle">
         Your money, <span class="text-gradient">finally in one place.</span>
       </h1>
-      <p class="mt-5 text-lg text-ice/80">
+      <p class="mt-5 text-lg text-ice/80" data-i18n="index.heroSubtitle">
         Track spending, savings, investments and net worth — built for the Gulf, in Arabic and English.
       </p>
-      <p class="mt-4 text-xs font-semibold uppercase tracking-wider text-ice/40">
+      <p class="mt-4 text-xs font-semibold uppercase tracking-wider text-ice/40" data-i18n="index.heroCurrencies">
         QAR · SAR · AED · KWD · BHD · OMR · and more
       </p>
       <div class="mt-8 flex flex-wrap gap-3">
-        <a href="https://app.raseedee.com" class="rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-navy shadow-sm hover:bg-goldlight">Join the Free Beta</a>
-        <a href="#how-it-works" class="rounded-lg border border-white/20 px-6 py-3 text-sm font-semibold text-ice hover:bg-white/5">See How It Works</a>
+        <a href="https://app.raseedee.com" class="rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-navy shadow-sm hover:bg-goldlight" data-i18n="index.heroCta1">Join the Free Beta</a>
+        <a href="#how-it-works" class="rounded-lg border border-white/20 px-6 py-3 text-sm font-semibold text-ice hover:bg-white/5" data-i18n="index.heroCta2">See How It Works</a>
       </div>
-      <p class="mt-4 text-xs text-ice/40">Free during Beta · No card required</p>
+      <p class="mt-4 text-xs text-ice/40" data-i18n="index.heroFinePrint">Free during Beta · No card required</p>
     </div>
 
     <!-- Product hero visual — a high-fidelity mockup of the actual dashboard
          layout/data model, not a literal screenshot (no authenticated
          screenshot could be captured for this build). Swap the inner panel
          for a real screenshot whenever one is available; markup is a single
-         self-contained block so a straight <img> can drop in later. -->
-    <div class="card-hover float reveal reveal-delay-2 overflow-hidden rounded-2xl border border-white/10 bg-white shadow-2xl shadow-black/40">
+         self-contained block so a straight <img> can drop in later. Kept
+         LTR internally (dir="ltr") even on the Arabic page: it's a mockup
+         of numeric financial data (amounts, a bar chart, month labels),
+         which the RTL requirements explicitly call out as staying
+         unreversed — full localization of this mockup is a follow-up. -->
+    <div class="card-hover float reveal reveal-delay-2 overflow-hidden rounded-2xl border border-white/10 bg-white text-left shadow-2xl shadow-black/40" dir="ltr">
       <div class="flex items-center gap-1.5 border-b border-slate-100 bg-navy px-4 py-2.5">
         <span class="h-2.5 w-2.5 rounded-full bg-[#E5735A]"></span>
         <span class="h-2.5 w-2.5 rounded-full bg-[#E8C15A]"></span>
         <span class="h-2.5 w-2.5 rounded-full bg-[#59C27A]"></span>
-        <span class="ml-auto text-[10px] font-semibold uppercase tracking-wider text-ice/50">Raseedee · Dashboard</span>
+        <span class="ms-auto text-[10px] font-semibold uppercase tracking-wider text-ice/50" data-i18n="index.mockDashboardLabel">Raseedee · Dashboard</span>
       </div>
       <div class="p-5">
         <div class="flex items-center justify-between">
-          <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">Net worth</p>
-          <span class="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">+6.2% vs last month</span>
+          <p class="text-xs font-semibold uppercase tracking-wide text-slate-400" data-i18n="index.mockNetWorth">Net worth</p>
+          <span class="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700" data-i18n="index.mockNetWorthChange">+6.2% vs last month</span>
         </div>
         <p class="mt-1 text-3xl font-bold tabular-nums text-navy">QAR 178,420</p>
         <div class="mt-4 grid grid-cols-3 gap-2">
           <div class="rounded-lg border border-slate-100 bg-slate-50 p-2.5">
-            <p class="text-[10px] font-medium uppercase text-slate-400">Savings</p>
+            <p class="text-[10px] font-medium uppercase text-slate-400" data-i18n="index.mockSavings">Savings</p>
             <p class="mt-0.5 text-sm font-semibold text-navy">42,300</p>
           </div>
           <div class="rounded-lg border border-slate-100 bg-slate-50 p-2.5">
-            <p class="text-[10px] font-medium uppercase text-slate-400">Invested</p>
+            <p class="text-[10px] font-medium uppercase text-slate-400" data-i18n="index.mockInvested">Invested</p>
             <p class="mt-0.5 text-sm font-semibold text-navy">61,900</p>
           </div>
           <div class="rounded-lg border border-slate-100 bg-slate-50 p-2.5">
-            <p class="text-[10px] font-medium uppercase text-slate-400">Net worth</p>
+            <p class="text-[10px] font-medium uppercase text-slate-400" data-i18n="index.mockNetWorthShort">Net worth</p>
             <p class="mt-0.5 text-sm font-semibold text-navy">178,420</p>
           </div>
         </div>
@@ -178,72 +202,72 @@
 <section class="border-b border-white/10 bg-navy3">
   <div class="mx-auto max-w-5xl px-5 py-20">
     <div class="reveal mx-auto max-w-2xl text-center">
-      <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Your financial life shouldn't be scattered across different places.</h2>
+      <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl" data-i18n="index.problemTitle">Your financial life shouldn't be scattered across different places.</h2>
     </div>
 
     <div class="reveal reveal-delay-1 mt-8 flex flex-wrap justify-center gap-2.5">
-      <span class="rounded-full border border-white/10 bg-navy2/50 px-3.5 py-1.5 text-xs font-medium text-ice/70">Salary in one account</span>
-      <span class="rounded-full border border-white/10 bg-navy2/50 px-3.5 py-1.5 text-xs font-medium text-ice/70">Multiple cards</span>
-      <span class="rounded-full border border-white/10 bg-navy2/50 px-3.5 py-1.5 text-xs font-medium text-ice/70">Recurring expenses</span>
-      <span class="rounded-full border border-white/10 bg-navy2/50 px-3.5 py-1.5 text-xs font-medium text-ice/70">Savings</span>
-      <span class="rounded-full border border-white/10 bg-navy2/50 px-3.5 py-1.5 text-xs font-medium text-ice/70">Installments</span>
-      <span class="rounded-full border border-white/10 bg-navy2/50 px-3.5 py-1.5 text-xs font-medium text-ice/70">Investments</span>
-      <span class="rounded-full border border-white/10 bg-navy2/50 px-3.5 py-1.5 text-xs font-medium text-ice/70">Cash transactions</span>
+      <span class="rounded-full border border-white/10 bg-navy2/50 px-3.5 py-1.5 text-xs font-medium text-ice/70" data-i18n="index.problemTag1">Salary in one account</span>
+      <span class="rounded-full border border-white/10 bg-navy2/50 px-3.5 py-1.5 text-xs font-medium text-ice/70" data-i18n="index.problemTag2">Multiple cards</span>
+      <span class="rounded-full border border-white/10 bg-navy2/50 px-3.5 py-1.5 text-xs font-medium text-ice/70" data-i18n="index.problemTag3">Recurring expenses</span>
+      <span class="rounded-full border border-white/10 bg-navy2/50 px-3.5 py-1.5 text-xs font-medium text-ice/70" data-i18n="index.problemTag4">Savings</span>
+      <span class="rounded-full border border-white/10 bg-navy2/50 px-3.5 py-1.5 text-xs font-medium text-ice/70" data-i18n="index.problemTag5">Installments</span>
+      <span class="rounded-full border border-white/10 bg-navy2/50 px-3.5 py-1.5 text-xs font-medium text-ice/70" data-i18n="index.problemTag6">Investments</span>
+      <span class="rounded-full border border-white/10 bg-navy2/50 px-3.5 py-1.5 text-xs font-medium text-ice/70" data-i18n="index.problemTag7">Cash transactions</span>
     </div>
 
     <div class="mt-12 grid gap-4 sm:grid-cols-2">
       <div class="reveal reveal-delay-1 rounded-xl border border-white/10 bg-navy2/40 p-5">
-        <p class="font-serif-display text-lg text-white">"Where did my money actually go?"</p>
+        <p class="font-serif-display text-lg text-white" data-i18n="index.problemQuote1">"Where did my money actually go?"</p>
       </div>
       <div class="reveal reveal-delay-2 rounded-xl border border-white/10 bg-navy2/40 p-5">
-        <p class="font-serif-display text-lg text-white">"How much did I really save?"</p>
+        <p class="font-serif-display text-lg text-white" data-i18n="index.problemQuote2">"How much did I really save?"</p>
       </div>
       <div class="reveal reveal-delay-3 rounded-xl border border-white/10 bg-navy2/40 p-5">
-        <p class="font-serif-display text-lg text-white">"What is my net worth today?"</p>
+        <p class="font-serif-display text-lg text-white" data-i18n="index.problemQuote3">"What is my net worth today?"</p>
       </div>
       <div class="reveal reveal-delay-4 rounded-xl border border-white/10 bg-navy2/40 p-5">
-        <p class="font-serif-display text-lg text-white">"Am I financially better off than last year?"</p>
+        <p class="font-serif-display text-lg text-white" data-i18n="index.problemQuote4">"Am I financially better off than last year?"</p>
       </div>
     </div>
-    <p class="reveal reveal-delay-5 mt-8 text-center text-sm text-ice/50">More control than a bank app. Less work than a spreadsheet.</p>
+    <p class="reveal reveal-delay-5 mt-8 text-center text-sm text-ice/50" data-i18n="index.problemFooter">More control than a bank app. Less work than a spreadsheet.</p>
   </div>
 </section>
 
 <!-- Product: Track -> Understand -> Grow -->
 <section id="product" class="mx-auto max-w-6xl px-5 py-20">
   <div class="reveal mx-auto max-w-2xl text-center">
-    <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Track. Understand. <span class="text-gradient">Grow.</span></h2>
-    <p class="mt-3 text-ice/70">One system for your whole financial picture — not three different apps.</p>
+    <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl" data-i18n-html="index.productTitle">Track. Understand. <span class="text-gradient">Grow.</span></h2>
+    <p class="mt-3 text-ice/70" data-i18n="index.productSubtitle">One system for your whole financial picture — not three different apps.</p>
   </div>
 
   <div class="mt-12 grid gap-6 md:grid-cols-3">
     <div class="card-hover-dark reveal reveal-delay-1 rounded-xl border border-white/10 bg-navy2/40 p-6">
-      <span class="text-xs font-bold uppercase tracking-widest text-goldlight">Track</span>
+      <span class="text-xs font-bold uppercase tracking-widest text-goldlight" data-i18n="index.trackLabel">Track</span>
       <ul class="mt-4 space-y-2.5 text-sm text-ice/70">
-        <li class="flex gap-2"><span class="text-gold">✓</span> Income</li>
-        <li class="flex gap-2"><span class="text-gold">✓</span> Expenses</li>
-        <li class="flex gap-2"><span class="text-gold">✓</span> Recurring transactions</li>
-        <li class="flex gap-2"><span class="text-gold">✓</span> Savings</li>
-        <li class="flex gap-2"><span class="text-gold">✓</span> Installments</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.trackItem1">Income</span></li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.trackItem2">Expenses</span></li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.trackItem3">Recurring transactions</span></li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.trackItem4">Savings</span></li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.trackItem5">Installments</span></li>
       </ul>
     </div>
     <div class="card-hover-dark reveal reveal-delay-2 rounded-xl border border-white/10 bg-navy2/40 p-6">
-      <span class="text-xs font-bold uppercase tracking-widest text-goldlight">Understand</span>
+      <span class="text-xs font-bold uppercase tracking-widest text-goldlight" data-i18n="index.understandLabel">Understand</span>
       <ul class="mt-4 space-y-2.5 text-sm text-ice/70">
-        <li class="flex gap-2"><span class="text-gold">✓</span> Savings rate</li>
-        <li class="flex gap-2"><span class="text-gold">✓</span> Spending breakdown</li>
-        <li class="flex gap-2"><span class="text-gold">✓</span> Income vs. expenses</li>
-        <li class="flex gap-2"><span class="text-gold">✓</span> Monthly trends</li>
-        <li class="flex gap-2"><span class="text-gold">✓</span> Net worth</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.understandItem1">Savings rate</span></li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.understandItem2">Spending breakdown</span></li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.understandItem3">Income vs. expenses</span></li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.understandItem4">Monthly trends</span></li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.understandItem5">Net worth</span></li>
       </ul>
     </div>
     <div class="card-hover-dark reveal reveal-delay-3 rounded-xl border border-white/10 bg-navy2/40 p-6">
-      <span class="text-xs font-bold uppercase tracking-widest text-goldlight">Grow</span>
+      <span class="text-xs font-bold uppercase tracking-widest text-goldlight" data-i18n="index.growLabel">Grow</span>
       <ul class="mt-4 space-y-2.5 text-sm text-ice/70">
-        <li class="flex gap-2"><span class="text-gold">✓</span> Investments</li>
-        <li class="flex gap-2"><span class="text-gold">✓</span> Portfolio performance</li>
-        <li class="flex gap-2"><span class="text-gold">✓</span> Financial goals</li>
-        <li class="flex gap-2"><span class="text-gold">✓</span> AI-powered insights</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.growItem1">Investments</span></li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.growItem2">Portfolio performance</span></li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.growItem3">Financial goals</span></li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.growItem4">AI-powered insights</span></li>
       </ul>
     </div>
   </div>
@@ -253,96 +277,96 @@
 <section class="border-y border-white/10 bg-navy3">
   <div class="mx-auto max-w-6xl px-5 py-20">
     <div class="reveal mx-auto max-w-2xl text-center">
-      <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">See it, not just read about it.</h2>
+      <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl" data-i18n="index.screenshotsTitle">See it, not just read about it.</h2>
     </div>
 
     <!-- Transaction logging -->
     <div class="mt-16 grid items-center gap-10 md:grid-cols-2">
       <div class="reveal reveal-delay-1 order-2 md:order-1">
-        <h3 class="text-xl font-semibold text-white">Log transactions in seconds</h3>
-        <p class="mt-3 text-sm leading-relaxed text-ice/70">Record income and expenses with your own fields, in any currency — no rigid category list to fight with.</p>
+        <h3 class="text-xl font-semibold text-white" data-i18n="index.txSectionTitle">Log transactions in seconds</h3>
+        <p class="mt-3 text-sm leading-relaxed text-ice/70" data-i18n="index.txSectionBody">Record income and expenses with your own fields, in any currency — no rigid category list to fight with.</p>
       </div>
-      <div class="card-hover reveal reveal-delay-2 order-1 overflow-hidden rounded-2xl border border-white/10 bg-white shadow-xl shadow-black/30 md:order-2">
+      <div class="card-hover reveal reveal-delay-2 order-1 overflow-hidden rounded-2xl border border-white/10 bg-white text-left shadow-xl shadow-black/30 md:order-2" dir="ltr">
         <div class="flex items-center gap-1.5 border-b border-slate-100 bg-navy px-4 py-2.5">
           <span class="h-2.5 w-2.5 rounded-full bg-[#E5735A]"></span><span class="h-2.5 w-2.5 rounded-full bg-[#E8C15A]"></span><span class="h-2.5 w-2.5 rounded-full bg-[#59C27A]"></span>
-          <span class="ml-auto text-[10px] font-semibold uppercase tracking-wider text-ice/50">Raseedee · Add Transaction</span>
+          <span class="ms-auto text-[10px] font-semibold uppercase tracking-wider text-ice/50" data-i18n="index.txMockLabel">Raseedee · Add Transaction</span>
         </div>
         <div class="space-y-3 p-5 text-sm">
           <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-3 py-2.5">
-            <span class="text-slate-500">Field</span><span class="font-medium text-navy">Groceries</span>
+            <span class="text-slate-500" data-i18n="index.txMockField">Field</span><span class="font-medium text-navy" data-i18n="index.txMockFieldValue">Groceries</span>
           </div>
           <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-3 py-2.5">
-            <span class="text-slate-500">Amount</span><span class="font-medium text-navy">QAR 214.50</span>
+            <span class="text-slate-500" data-i18n="index.txMockAmount">Amount</span><span class="font-medium text-navy" data-i18n="index.txMockAmountValue">QAR 214.50</span>
           </div>
           <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-3 py-2.5">
-            <span class="text-slate-500">Date</span><span class="font-medium text-navy">Today</span>
+            <span class="text-slate-500" data-i18n="index.txMockDate">Date</span><span class="font-medium text-navy" data-i18n="index.txMockDateValue">Today</span>
           </div>
-          <div class="rounded-lg bg-gold px-3 py-2.5 text-center text-sm font-semibold text-navy">Save transaction</div>
+          <div class="rounded-lg bg-gold px-3 py-2.5 text-center text-sm font-semibold text-navy" data-i18n="index.txMockSave">Save transaction</div>
         </div>
       </div>
     </div>
 
     <!-- Reports / spending analysis -->
     <div class="mt-16 grid items-center gap-10 md:grid-cols-2">
-      <div class="card-hover reveal reveal-delay-1 overflow-hidden rounded-2xl border border-white/10 bg-white shadow-xl shadow-black/30">
+      <div class="card-hover reveal reveal-delay-1 overflow-hidden rounded-2xl border border-white/10 bg-white text-left shadow-xl shadow-black/30" dir="ltr">
         <div class="flex items-center gap-1.5 border-b border-slate-100 bg-navy px-4 py-2.5">
           <span class="h-2.5 w-2.5 rounded-full bg-[#E5735A]"></span><span class="h-2.5 w-2.5 rounded-full bg-[#E8C15A]"></span><span class="h-2.5 w-2.5 rounded-full bg-[#59C27A]"></span>
-          <span class="ml-auto text-[10px] font-semibold uppercase tracking-wider text-ice/50">Raseedee · Reports</span>
+          <span class="ms-auto text-[10px] font-semibold uppercase tracking-wider text-ice/50" data-i18n="index.reportsMockLabel">Raseedee · Reports</span>
         </div>
         <div class="p-5">
-          <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">Spending by category</p>
+          <p class="text-xs font-semibold uppercase tracking-wide text-slate-400" data-i18n="index.reportsMockTitle">Spending by category</p>
           <div class="mt-4 space-y-2.5">
             <div>
-              <div class="flex justify-between text-xs text-slate-500"><span>Housing</span><span>34%</span></div>
+              <div class="flex justify-between text-xs text-slate-500"><span data-i18n="index.reportsHousing">Housing</span><span>34%</span></div>
               <div class="mt-1 h-1.5 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-navy" style="width:34%"></div></div>
             </div>
             <div>
-              <div class="flex justify-between text-xs text-slate-500"><span>Groceries</span><span>21%</span></div>
+              <div class="flex justify-between text-xs text-slate-500"><span data-i18n="index.reportsGroceries">Groceries</span><span>21%</span></div>
               <div class="mt-1 h-1.5 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-navy" style="width:21%"></div></div>
             </div>
             <div>
-              <div class="flex justify-between text-xs text-slate-500"><span>Transport</span><span>14%</span></div>
+              <div class="flex justify-between text-xs text-slate-500"><span data-i18n="index.reportsTransport">Transport</span><span>14%</span></div>
               <div class="mt-1 h-1.5 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-navy" style="width:14%"></div></div>
             </div>
             <div>
-              <div class="flex justify-between text-xs text-slate-500"><span>Dining out</span><span>11%</span></div>
+              <div class="flex justify-between text-xs text-slate-500"><span data-i18n="index.reportsDining">Dining out</span><span>11%</span></div>
               <div class="mt-1 h-1.5 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-gold" style="width:11%"></div></div>
             </div>
           </div>
         </div>
       </div>
       <div class="reveal reveal-delay-2">
-        <h3 class="text-xl font-semibold text-white">Understand where it went</h3>
-        <p class="mt-3 text-sm leading-relaxed text-ice/70">Spending breakdowns, income vs. expenses, and month-over-month trends — without building a single pivot table.</p>
+        <h3 class="text-xl font-semibold text-white" data-i18n="index.reportsSectionTitle">Understand where it went</h3>
+        <p class="mt-3 text-sm leading-relaxed text-ice/70" data-i18n="index.reportsSectionBody">Spending breakdowns, income vs. expenses, and month-over-month trends — without building a single pivot table.</p>
       </div>
     </div>
 
     <!-- Investments -->
     <div id="investments" class="mt-16 scroll-mt-24 grid items-center gap-10 md:grid-cols-2">
       <div class="reveal reveal-delay-1 order-2 md:order-1">
-        <h3 class="text-xl font-semibold text-white">Your portfolio, alongside everything else</h3>
-        <p class="mt-3 text-sm leading-relaxed text-ice/70">Stocks, ETFs, mutual funds, bonds, crypto and more — tracked in the same dashboard as your savings, not a separate app.</p>
+        <h3 class="text-xl font-semibold text-white" data-i18n="index.invSectionTitle">Your portfolio, alongside everything else</h3>
+        <p class="mt-3 text-sm leading-relaxed text-ice/70" data-i18n="index.invSectionBody">Stocks, ETFs, mutual funds, bonds, crypto and more — tracked in the same dashboard as your savings, not a separate app.</p>
       </div>
-      <div class="card-hover reveal reveal-delay-2 order-1 overflow-hidden rounded-2xl border border-white/10 bg-white shadow-xl shadow-black/30 md:order-2">
+      <div class="card-hover reveal reveal-delay-2 order-1 overflow-hidden rounded-2xl border border-white/10 bg-white text-left shadow-xl shadow-black/30 md:order-2" dir="ltr">
         <div class="flex items-center gap-1.5 border-b border-slate-100 bg-navy px-4 py-2.5">
           <span class="h-2.5 w-2.5 rounded-full bg-[#E5735A]"></span><span class="h-2.5 w-2.5 rounded-full bg-[#E8C15A]"></span><span class="h-2.5 w-2.5 rounded-full bg-[#59C27A]"></span>
-          <span class="ml-auto text-[10px] font-semibold uppercase tracking-wider text-ice/50">Raseedee · Investments</span>
+          <span class="ms-auto text-[10px] font-semibold uppercase tracking-wider text-ice/50" data-i18n="index.invMockLabel">Raseedee · Investments</span>
         </div>
         <div class="p-5">
           <div class="flex items-center justify-between">
-            <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">Portfolio value</p>
-            <span class="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">+4,003 unrealized</span>
+            <p class="text-xs font-semibold uppercase tracking-wide text-slate-400" data-i18n="index.invMockTitle">Portfolio value</p>
+            <span class="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700" data-i18n="index.invMockChange">+4,003 unrealized</span>
           </div>
           <p class="mt-1 text-2xl font-bold text-navy">QAR 61,900</p>
           <div class="mt-4 space-y-2">
             <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-3 py-2 text-sm">
-              <span class="text-slate-600">ETFs</span><span class="font-medium text-navy">48%</span>
+              <span class="text-slate-600" data-i18n="index.invMockEtfs">ETFs</span><span class="font-medium text-navy">48%</span>
             </div>
             <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-3 py-2 text-sm">
-              <span class="text-slate-600">Stocks</span><span class="font-medium text-navy">31%</span>
+              <span class="text-slate-600" data-i18n="index.invMockStocks">Stocks</span><span class="font-medium text-navy">31%</span>
             </div>
             <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-3 py-2 text-sm">
-              <span class="text-slate-600">Gold &amp; cash</span><span class="font-medium text-navy">21%</span>
+              <span class="text-slate-600" data-i18n-html="index.invMockGoldCash">Gold &amp; cash</span><span class="font-medium text-navy">21%</span>
             </div>
           </div>
         </div>
@@ -355,42 +379,42 @@
 <section id="ai" class="scroll-mt-16 mx-auto max-w-6xl px-5 py-20">
   <div class="relative grid items-center gap-12 md:grid-cols-2">
     <div class="reveal order-2 md:order-1">
-      <span class="inline-flex items-center rounded-full bg-gold/10 px-3 py-1 text-xs font-semibold text-goldlight ring-1 ring-gold/30">
+      <span class="inline-flex items-center rounded-full bg-gold/10 px-3 py-1 text-xs font-semibold text-goldlight ring-1 ring-gold/30" data-i18n="index.aiEyebrow">
         Built in, no setup
       </span>
-      <h2 class="mt-5 text-2xl font-bold leading-tight tracking-tight text-white sm:text-3xl">
+      <h2 class="mt-5 text-2xl font-bold leading-tight tracking-tight text-white sm:text-3xl" data-i18n-html="index.aiTitle">
         Ask your money <span class="text-gradient">anything.</span>
       </h2>
-      <p class="mt-4 text-ice/70">
+      <p class="mt-4 text-ice/70" data-i18n="index.aiSubtitle">
         Malee, your AI financial assistant, understands your financial history and helps you make sense of it.
       </p>
       <ul class="mt-6 space-y-2.5 text-sm text-ice/70">
-        <li class="flex gap-2.5"><span class="mt-0.5 text-gold">✓</span> "Where did I spend the most this month?"</li>
-        <li class="flex gap-2.5"><span class="mt-0.5 text-gold">✓</span> "Why did my savings rate drop?"</li>
-        <li class="flex gap-2.5"><span class="mt-0.5 text-gold">✓</span> "How much have I spent on restaurants this year?"</li>
-        <li class="flex gap-2.5"><span class="mt-0.5 text-gold">✓</span> "How has my net worth changed over the last six months?"</li>
-        <li class="flex gap-2.5"><span class="mt-0.5 text-gold">✓</span> "Can I afford a QAR 4,000 trip next month?"</li>
+        <li class="flex gap-2.5"><span class="mt-0.5 text-gold">✓</span> <span data-i18n="index.aiQ1">"Where did I spend the most this month?"</span></li>
+        <li class="flex gap-2.5"><span class="mt-0.5 text-gold">✓</span> <span data-i18n="index.aiQ2">"Why did my savings rate drop?"</span></li>
+        <li class="flex gap-2.5"><span class="mt-0.5 text-gold">✓</span> <span data-i18n="index.aiQ3">"How much have I spent on restaurants this year?"</span></li>
+        <li class="flex gap-2.5"><span class="mt-0.5 text-gold">✓</span> <span data-i18n="index.aiQ4">"How has my net worth changed over the last six months?"</span></li>
+        <li class="flex gap-2.5"><span class="mt-0.5 text-gold">✓</span> <span data-i18n="index.aiQ5">"Can I afford a QAR 4,000 trip next month?"</span></li>
       </ul>
-      <p class="mt-6 text-xs italic text-ice/40">Financial analysis and insights — not regulated financial or investment advice.</p>
+      <p class="mt-6 text-xs italic text-ice/40" data-i18n="index.aiDisclaimer">Financial analysis and insights — not regulated financial or investment advice.</p>
     </div>
 
     <!-- Interactive-looking chat mockup — not a live embed. -->
-    <div class="card-hover float reveal reveal-delay-2 order-1 mx-auto w-full max-w-sm overflow-hidden rounded-2xl border border-white/10 bg-white shadow-2xl shadow-black/40 md:order-2">
+    <div class="card-hover float reveal reveal-delay-2 order-1 mx-auto w-full max-w-sm overflow-hidden rounded-2xl border border-white/10 bg-white text-left shadow-2xl shadow-black/40 md:order-2" dir="ltr">
       <div class="flex items-center gap-2 border-b border-slate-100 bg-navy px-4 py-3">
         <span class="flex h-7 w-7 items-center justify-center rounded-full bg-gold text-xs font-bold text-navy">M</span>
         <div>
-          <p class="text-sm font-semibold text-white">Malee</p>
-          <p class="text-[11px] text-ice/50">Your finances, answered</p>
+          <p class="text-sm font-semibold text-white" data-i18n="index.aiChatName">Malee</p>
+          <p class="text-[11px] text-ice/50" data-i18n="index.aiChatTagline">Your finances, answered</p>
         </div>
       </div>
       <div class="space-y-3 p-4">
-        <div class="max-w-[85%] rounded-2xl rounded-bl-sm bg-slate-100 px-3.5 py-2.5 text-sm text-slate-700">
+        <div class="max-w-[85%] rounded-2xl rounded-es-sm bg-slate-100 px-3.5 py-2.5 text-sm text-slate-700" data-i18n="index.aiChatBubble1">
           Ask me anything about your finances.
         </div>
-        <div class="ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-navy px-3.5 py-2.5 text-sm text-white">
+        <div class="ms-auto max-w-[85%] rounded-2xl rounded-ee-sm bg-navy px-3.5 py-2.5 text-sm text-white" data-i18n="index.aiChatBubble2">
           Can I afford a QAR 4,000 trip next month?
         </div>
-        <div class="max-w-[85%] rounded-2xl rounded-bl-sm bg-slate-100 px-3.5 py-2.5 text-sm text-slate-700">
+        <div class="max-w-[85%] rounded-2xl rounded-es-sm bg-slate-100 px-3.5 py-2.5 text-sm text-slate-700" data-i18n-html="index.aiChatBubble3">
           Based on your last 3 months, yes — you'd have about <span class="font-semibold">QAR 1,150</span> left while keeping your current savings rate.
         </div>
       </div>
@@ -402,41 +426,41 @@
 <section class="border-y border-white/10 bg-navy3">
   <div class="mx-auto max-w-6xl px-5 py-20">
     <div class="reveal mx-auto max-w-2xl text-center">
-      <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Built around the Gulf, from day one.</h2>
-      <p class="mt-3 text-ice/70">Not a global app with a translation bolted on.</p>
+      <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl" data-i18n="index.gulfTitle">Built around the Gulf, from day one.</h2>
+      <p class="mt-3 text-ice/70" data-i18n="index.gulfSubtitle">Not a global app with a translation bolted on.</p>
     </div>
     <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <div class="reveal reveal-delay-1 rounded-xl border border-white/10 bg-navy2/40 p-5">
-        <p class="font-semibold text-white">English &amp; Arabic</p>
-        <p class="mt-1.5 text-sm text-ice/60">Available in English &amp; Arabic, with RTL support. Arabic localization continues across additional product areas.</p>
+        <p class="font-semibold text-white" data-i18n-html="index.gulf1Title">English &amp; Arabic</p>
+        <p class="mt-1.5 text-sm text-ice/60" data-i18n-html="index.gulf1Body">Available in English &amp; Arabic, with RTL support. Arabic localization continues across additional product areas.</p>
       </div>
       <div class="reveal reveal-delay-2 rounded-xl border border-white/10 bg-navy2/40 p-5">
-        <p class="font-semibold text-white">GCC currencies</p>
-        <p class="mt-1.5 text-sm text-ice/60">QAR, SAR, AED, KWD, BHD, OMR and more, tracked natively.</p>
+        <p class="font-semibold text-white" data-i18n="index.gulf2Title">GCC currencies</p>
+        <p class="mt-1.5 text-sm text-ice/60" data-i18n="index.gulf2Body">QAR, SAR, AED, KWD, BHD, OMR and more, tracked natively.</p>
       </div>
       <div class="reveal reveal-delay-3 rounded-xl border border-white/10 bg-navy2/40 p-5">
-        <p class="font-semibold text-white">Multi-currency households</p>
-        <p class="mt-1.5 text-sm text-ice/60">Built for people who earn, spend and save across more than one currency.</p>
+        <p class="font-semibold text-white" data-i18n="index.gulf3Title">Multi-currency households</p>
+        <p class="mt-1.5 text-sm text-ice/60" data-i18n="index.gulf3Body">Built for people who earn, spend and save across more than one currency.</p>
       </div>
       <div class="reveal reveal-delay-4 rounded-xl border border-white/10 bg-navy2/40 p-5">
-        <p class="font-semibold text-white">Salaried professionals</p>
-        <p class="mt-1.5 text-sm text-ice/60">Designed around a regular salary, recurring expenses, and building savings over time.</p>
+        <p class="font-semibold text-white" data-i18n="index.gulf4Title">Salaried professionals</p>
+        <p class="mt-1.5 text-sm text-ice/60" data-i18n="index.gulf4Body">Designed around a regular salary, recurring expenses, and building savings over time.</p>
       </div>
       <div class="reveal reveal-delay-1 rounded-xl border border-white/10 bg-navy2/40 p-5">
-        <p class="font-semibold text-white">Savings &amp; installments</p>
-        <p class="mt-1.5 text-sm text-ice/60">Track savings goals and installment payoff timelines side by side.</p>
+        <p class="font-semibold text-white" data-i18n-html="index.gulf5Title">Savings &amp; installments</p>
+        <p class="mt-1.5 text-sm text-ice/60" data-i18n="index.gulf5Body">Track savings goals and installment payoff timelines side by side.</p>
       </div>
       <div class="reveal reveal-delay-2 rounded-xl border border-white/10 bg-navy2/40 p-5">
-        <p class="font-semibold text-white">Investment tracking</p>
-        <p class="mt-1.5 text-sm text-ice/60">Regional and global holdings, in the same dashboard as everything else.</p>
+        <p class="font-semibold text-white" data-i18n="index.gulf6Title">Investment tracking</p>
+        <p class="mt-1.5 text-sm text-ice/60" data-i18n="index.gulf6Body">Regional and global holdings, in the same dashboard as everything else.</p>
       </div>
       <div class="reveal reveal-delay-3 rounded-xl border border-white/10 bg-navy2/40 p-5">
-        <p class="font-semibold text-white">Real net worth</p>
-        <p class="mt-1.5 text-sm text-ice/60">One number that combines savings, investments and what you owe.</p>
+        <p class="font-semibold text-white" data-i18n="index.gulf7Title">Real net worth</p>
+        <p class="mt-1.5 text-sm text-ice/60" data-i18n="index.gulf7Body">One number that combines savings, investments and what you owe.</p>
       </div>
       <div class="reveal reveal-delay-4 rounded-xl border border-white/10 bg-navy2/40 p-5">
-        <p class="font-semibold text-white">Regional behavior</p>
-        <p class="mt-1.5 text-sm text-ice/60">Built around how people in the Gulf actually earn, spend and save.</p>
+        <p class="font-semibold text-white" data-i18n="index.gulf8Title">Regional behavior</p>
+        <p class="mt-1.5 text-sm text-ice/60" data-i18n="index.gulf8Body">Built around how people in the Gulf actually earn, spend and save.</p>
       </div>
     </div>
   </div>
@@ -445,23 +469,23 @@
 <!-- How it works -->
 <section id="how-it-works" class="scroll-mt-16 mx-auto max-w-6xl px-5 py-20">
   <div class="reveal mx-auto max-w-2xl text-center">
-    <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Less than two minutes a day.</h2>
+    <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl" data-i18n="index.howTitle">Less than two minutes a day.</h2>
   </div>
   <div class="mt-12 grid gap-8 md:grid-cols-3">
     <div class="reveal reveal-delay-1 text-center">
       <div class="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-gold text-sm font-bold text-navy shadow-md">1</div>
-      <h3 class="mt-4 font-semibold text-white">Set up your financial picture</h3>
-      <p class="mt-2 text-sm text-ice/60">Add income, expenses, savings and accounts.</p>
+      <h3 class="mt-4 font-semibold text-white" data-i18n="index.how1Title">Set up your financial picture</h3>
+      <p class="mt-2 text-sm text-ice/60" data-i18n="index.how1Body">Add income, expenses, savings and accounts.</p>
     </div>
     <div class="reveal reveal-delay-2 text-center">
       <div class="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-gold text-sm font-bold text-navy shadow-md">2</div>
-      <h3 class="mt-4 font-semibold text-white">Log as you go</h3>
-      <p class="mt-2 text-sm text-ice/60">Record transactions quickly throughout the day.</p>
+      <h3 class="mt-4 font-semibold text-white" data-i18n="index.how2Title">Log as you go</h3>
+      <p class="mt-2 text-sm text-ice/60" data-i18n="index.how2Body">Record transactions quickly throughout the day.</p>
     </div>
     <div class="reveal reveal-delay-3 text-center">
       <div class="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-gold text-sm font-bold text-navy shadow-md">3</div>
-      <h3 class="mt-4 font-semibold text-white">Understand your money</h3>
-      <p class="mt-2 text-sm text-ice/60">See trends, savings, investments and net worth in one dashboard.</p>
+      <h3 class="mt-4 font-semibold text-white" data-i18n="index.how3Title">Understand your money</h3>
+      <p class="mt-2 text-sm text-ice/60" data-i18n="index.how3Body">See trends, savings, investments and net worth in one dashboard.</p>
     </div>
   </div>
 </section>
@@ -469,12 +493,12 @@
 <!-- Beta info -->
 <section id="beta" class="scroll-mt-16 border-y border-white/10 bg-navy3">
   <div class="reveal mx-auto max-w-3xl px-5 py-16 text-center">
-    <span class="inline-flex items-center rounded-full bg-gold/10 px-3 py-1 text-xs font-semibold text-goldlight ring-1 ring-gold/30">Raseedee Beta</span>
-    <h2 class="mt-4 text-2xl font-bold tracking-tight text-white sm:text-3xl">Currently free, while we build.</h2>
-    <p class="mt-4 text-ice/70">
+    <span class="inline-flex items-center rounded-full bg-gold/10 px-3 py-1 text-xs font-semibold text-goldlight ring-1 ring-gold/30" data-i18n="index.betaBadge">Raseedee Beta</span>
+    <h2 class="mt-4 text-2xl font-bold tracking-tight text-white sm:text-3xl" data-i18n="index.betaTitle">Currently free, while we build.</h2>
+    <p class="mt-4 text-ice/70" data-i18n="index.betaBody1">
       Raseedee is currently in Beta and available free of charge while we continue developing and improving the platform. You get access to available Beta features without providing any payment details.
     </p>
-    <p class="mt-3 text-sm text-ice/50">
+    <p class="mt-3 text-sm text-ice/50" data-i18n="index.betaBody2">
       Features, functionality and availability may evolve during the Beta period. If paid plans are introduced in the future, we'll let you know in advance — and you'll be asked to actively choose a paid plan before any charge occurs. Beta users are never automatically enrolled into a paid subscription.
     </p>
   </div>
@@ -486,7 +510,8 @@
   real beta metrics and 1-3 genuine testimonials below, then delete the
   comment markers wrapping this section to publish it. Do not publish with
   placeholder numbers still showing — that reads as unfinished on a live
-  site.
+  site. NOTE: if/when this section is published, it will also need
+  data-i18n wiring added — it currently has none, since it isn't live.
 
 <section class="border-y border-white/10 bg-navy3">
   <div class="mx-auto max-w-6xl px-5 py-20">
@@ -528,11 +553,11 @@
 <!-- Pricing -->
 <section id="pricing" class="scroll-mt-16 mx-auto max-w-6xl px-5 py-20">
   <div class="reveal mx-auto max-w-2xl text-center">
-    <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Free during Beta</h2>
-    <p class="mt-3 text-ice/70">Every feature below is free to use while Raseedee is in Beta — no card required.</p>
+    <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl" data-i18n="index.pricingTitle">Free during Beta</h2>
+    <p class="mt-3 text-ice/70" data-i18n="index.pricingSubtitle">Every feature below is free to use while Raseedee is in Beta — no card required.</p>
   </div>
 
-  <div class="reveal reveal-delay-1 mx-auto mt-8 max-w-3xl rounded-xl border border-gold/30 bg-gold/5 p-4 text-center text-sm text-ice/70">
+  <div class="reveal reveal-delay-1 mx-auto mt-8 max-w-3xl rounded-xl border border-gold/30 bg-gold/5 p-4 text-center text-sm text-ice/70" data-i18n="index.pricingNotice">
     Nothing is charged today. The tiers below show our planned pricing structure for after the
     Beta — if we introduce them, you'll be asked to actively choose and confirm a plan before
     any charge applies.
@@ -545,98 +570,98 @@
        Beta sign-up, not a purchase. -->
   <div class="mx-auto mt-8 grid max-w-5xl gap-6 md:grid-cols-3">
     <div class="card-hover-dark reveal reveal-delay-1 rounded-2xl border border-white/10 bg-navy2/40 p-7">
-      <h3 class="font-semibold text-white">Free</h3>
+      <h3 class="font-semibold text-white" data-i18n="index.freeTierName">Free</h3>
       <p class="mt-4 text-3xl font-bold text-white">$0</p>
-      <p class="text-sm text-ice/50">Free during Beta</p>
+      <p class="text-sm text-ice/50" data-i18n="index.freeTierSub">Free during Beta</p>
       <ul class="mt-6 space-y-2.5 text-sm text-ice/70">
-        <li class="flex gap-2"><span class="text-gold">✓</span> 1 income field, 10 expense fields</li>
-        <li class="flex gap-2"><span class="text-gold">✓</span> Unlimited transactions</li>
-        <li class="flex gap-2"><span class="text-gold">✓</span> Dashboard &amp; net worth tracking</li>
-        <li class="flex gap-2"><span class="text-gold">✓</span> Savings tracking</li>
-        <li class="flex gap-2"><span class="text-gold">✓</span> Multi-currency</li>
-        <li class="flex gap-2"><span class="text-gold">✓</span> Excel export</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.freeTierItem1">1 income field, 10 expense fields</span></li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.freeTierItem2">Unlimited transactions</span></li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n-html="index.freeTierItem3">Dashboard &amp; net worth tracking</span></li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.freeTierItem4">Savings tracking</span></li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.freeTierItem5">Multi-currency</span></li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.freeTierItem6">Excel export</span></li>
       </ul>
-      <a href="https://app.raseedee.com" class="mt-7 block rounded-lg border border-white/20 py-2.5 text-center text-sm font-semibold text-ice hover:bg-white/5">Start Free</a>
+      <a href="https://app.raseedee.com" class="mt-7 block rounded-lg border border-white/20 py-2.5 text-center text-sm font-semibold text-ice hover:bg-white/5" data-i18n="index.freeTierCta">Start Free</a>
     </div>
 
     <div class="reveal reveal-delay-2 relative rounded-2xl bg-navy2 p-7">
       <div class="glow-ring" aria-hidden="true"></div>
-      <span class="absolute -top-3 left-7 rounded-full bg-gold px-3 py-1 text-xs font-semibold text-navy">Planned tier</span>
-      <h3 class="font-semibold text-white">Plus</h3>
-      <p class="mt-4 text-3xl font-bold text-white">$3.99<span class="text-base font-medium text-ice/50">/mo</span></p>
-      <p class="text-sm text-ice/50">Planned — free during Beta</p>
+      <span class="absolute -top-3 start-7 rounded-full bg-gold px-3 py-1 text-xs font-semibold text-navy" data-i18n="index.plusTierBadge">Planned tier</span>
+      <h3 class="font-semibold text-white" data-i18n="index.plusTierName">Plus</h3>
+      <p class="mt-4 text-3xl font-bold text-white" data-i18n-html="index.plusTierPrice">$3.99<span class="text-base font-medium text-ice/50">/mo</span></p>
+      <p class="text-sm text-ice/50" data-i18n="index.plusTierSub">Planned — free during Beta</p>
       <ul class="mt-6 space-y-2.5 text-sm text-ice/70">
-        <li class="flex gap-2"><span class="text-gold">✓</span> 2 income fields, 15 expense fields</li>
-        <li class="flex gap-2"><span class="text-gold">✓</span> Everything in Free</li>
-        <li class="flex gap-2"><span class="text-gold">✓</span> More room to model your finances precisely</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.plusTierItem1">2 income fields, 15 expense fields</span></li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.plusTierItem2">Everything in Free</span></li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.plusTierItem3">More room to model your finances precisely</span></li>
       </ul>
-      <a href="https://app.raseedee.com" class="mt-7 block rounded-lg bg-gold py-2.5 text-center text-sm font-semibold text-navy hover:bg-goldlight">Join the Free Beta</a>
+      <a href="https://app.raseedee.com" class="mt-7 block rounded-lg bg-gold py-2.5 text-center text-sm font-semibold text-navy hover:bg-goldlight" data-i18n="index.plusTierCta">Join the Free Beta</a>
     </div>
 
     <div class="card-hover-dark reveal reveal-delay-3 rounded-2xl border border-white/10 bg-navy2/40 p-7">
-      <h3 class="font-semibold text-white">Unlimited</h3>
-      <p class="mt-4 text-3xl font-bold text-white">$5.99<span class="text-base font-medium text-ice/50">/mo</span></p>
-      <p class="text-sm text-ice/50">Planned — free during Beta</p>
+      <h3 class="font-semibold text-white" data-i18n="index.unlimitedTierName">Unlimited</h3>
+      <p class="mt-4 text-3xl font-bold text-white" data-i18n-html="index.unlimitedTierPrice">$5.99<span class="text-base font-medium text-ice/50">/mo</span></p>
+      <p class="text-sm text-ice/50" data-i18n="index.unlimitedTierSub">Planned — free during Beta</p>
       <ul class="mt-6 space-y-2.5 text-sm text-ice/70">
-        <li class="flex gap-2"><span class="text-gold">✓</span> No limit on income or expense fields</li>
-        <li class="flex gap-2"><span class="text-gold">✓</span> Everything in Plus</li>
-        <li class="flex gap-2"><span class="text-gold">✓</span> Built for power users and complex finances</li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.unlimitedTierItem1">No limit on income or expense fields</span></li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.unlimitedTierItem2">Everything in Plus</span></li>
+        <li class="flex gap-2"><span class="text-gold">✓</span> <span data-i18n="index.unlimitedTierItem3">Built for power users and complex finances</span></li>
       </ul>
-      <a href="https://app.raseedee.com" class="mt-7 block rounded-lg border border-white/20 py-2.5 text-center text-sm font-semibold text-ice hover:bg-white/5">Join the Free Beta</a>
+      <a href="https://app.raseedee.com" class="mt-7 block rounded-lg border border-white/20 py-2.5 text-center text-sm font-semibold text-ice hover:bg-white/5" data-i18n="index.unlimitedTierCta">Join the Free Beta</a>
     </div>
   </div>
 
   <div class="mx-auto mt-6 max-w-5xl rounded-xl border border-white/10 bg-navy3 p-5 text-center">
-    <p class="text-sm text-ice/70"><span class="font-semibold text-goldlight">Investments add-on:</span> planned at $0.99/month post-Beta — track your portfolio's value, gains and allocation over time. Not charged during Beta; contact us for early access.</p>
+    <p class="text-sm text-ice/70"><span class="font-semibold text-goldlight" data-i18n="index.investmentsAddonLabel">Investments add-on:</span> <span data-i18n="index.investmentsAddonBody">planned at $0.99/month post-Beta — track your portfolio's value, gains and allocation over time. Not charged during Beta; contact us for early access.</span></p>
   </div>
-  <p class="mt-6 text-center text-xs text-ice/40">See the <a href="docs/plans.html" class="underline hover:text-ice/70">plans &amp; pricing docs</a> for full details.</p>
+  <p class="mt-6 text-center text-xs text-ice/40" data-i18n-html="index.pricingDocsLink">See the <a href="docs/plans.html" class="underline hover:text-ice/70">plans &amp; pricing docs</a> for full details.</p>
 </section>
 
 <!-- Trust & Security -->
 <section class="border-y border-white/10 bg-navy3">
   <div class="mx-auto max-w-6xl px-5 py-20">
     <div class="reveal mx-auto max-w-2xl text-center">
-      <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Your financial data stays yours.</h2>
+      <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl" data-i18n="index.trustTitle">Your financial data stays yours.</h2>
     </div>
     <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       <div class="reveal reveal-delay-1 rounded-xl border border-white/10 bg-navy2/40 p-5">
-        <p class="font-semibold text-white">Private by design</p>
-        <p class="mt-1.5 text-sm text-ice/60">Your data is yours — used to run the app, nothing else.</p>
+        <p class="font-semibold text-white" data-i18n="index.trust1Title">Private by design</p>
+        <p class="mt-1.5 text-sm text-ice/60" data-i18n="index.trust1Body">Your data is yours — used to run the app, nothing else.</p>
       </div>
       <div class="reveal reveal-delay-2 rounded-xl border border-white/10 bg-navy2/40 p-5">
-        <p class="font-semibold text-white">No advertisements</p>
-        <p class="mt-1.5 text-sm text-ice/60">No ads, ever, in a place that holds your financial life.</p>
+        <p class="font-semibold text-white" data-i18n="index.trust2Title">No advertisements</p>
+        <p class="mt-1.5 text-sm text-ice/60" data-i18n="index.trust2Body">No ads, ever, in a place that holds your financial life.</p>
       </div>
       <div class="reveal reveal-delay-3 rounded-xl border border-white/10 bg-navy2/40 p-5">
-        <p class="font-semibold text-white">Never sold</p>
-        <p class="mt-1.5 text-sm text-ice/60">Your financial data is not sold to anyone.</p>
+        <p class="font-semibold text-white" data-i18n="index.trust3Title">Never sold</p>
+        <p class="mt-1.5 text-sm text-ice/60" data-i18n="index.trust3Body">Your financial data is not sold to anyone.</p>
       </div>
       <div class="reveal reveal-delay-4 rounded-xl border border-white/10 bg-navy2/40 p-5">
-        <p class="font-semibold text-white">Row-level access controls</p>
-        <p class="mt-1.5 text-sm text-ice/60">Database-level rules restrict every record to its owner.</p>
+        <p class="font-semibold text-white" data-i18n="index.trust4Title">Row-level access controls</p>
+        <p class="mt-1.5 text-sm text-ice/60" data-i18n="index.trust4Body">Database-level rules restrict every record to its owner.</p>
       </div>
       <div class="reveal reveal-delay-1 rounded-xl border border-white/10 bg-navy2/40 p-5">
-        <p class="font-semibold text-white">Secure authentication</p>
-        <p class="mt-1.5 text-sm text-ice/60">Sign-in is handled by a dedicated authentication provider.</p>
+        <p class="font-semibold text-white" data-i18n="index.trust5Title">Secure authentication</p>
+        <p class="mt-1.5 text-sm text-ice/60" data-i18n="index.trust5Body">Sign-in is handled by a dedicated authentication provider.</p>
       </div>
       <div class="reveal reveal-delay-2 rounded-xl border border-white/10 bg-navy2/40 p-5">
-        <p class="font-semibold text-white">Separated by account</p>
-        <p class="mt-1.5 text-sm text-ice/60">Every user's data is isolated from every other user's.</p>
+        <p class="font-semibold text-white" data-i18n="index.trust6Title">Separated by account</p>
+        <p class="mt-1.5 text-sm text-ice/60" data-i18n="index.trust6Body">Every user's data is isolated from every other user's.</p>
       </div>
     </div>
-    <p class="reveal reveal-delay-3 mt-6 text-center text-sm text-ice/60">Export your data to Excel any time — it's always yours to take with you.</p>
+    <p class="reveal reveal-delay-3 mt-6 text-center text-sm text-ice/60" data-i18n="index.trustFooter">Export your data to Excel any time — it's always yours to take with you.</p>
   </div>
 </section>
 
 <!-- CTA -->
 <section class="relative overflow-hidden border-t border-white/10 bg-navy">
-  <div class="blob left-1/4 top-1/2 h-72 w-72 -translate-y-1/2 bg-gold/10" aria-hidden="true"></div>
+  <div class="blob start-1/4 top-1/2 h-72 w-72 -translate-y-1/2 bg-gold/10" aria-hidden="true"></div>
   <div class="reveal relative mx-auto max-w-4xl px-5 py-16 text-center">
-    <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Stop guessing what you're worth.</h2>
-    <p class="mt-3 text-ice/70">See your spending, savings, investments and net worth in one place.</p>
+    <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl" data-i18n="index.ctaTitle">Stop guessing what you're worth.</h2>
+    <p class="mt-3 text-ice/70" data-i18n="index.ctaBody">See your spending, savings, investments and net worth in one place.</p>
     <div class="mt-7 flex flex-wrap justify-center gap-3">
-      <a href="https://app.raseedee.com" class="inline-block rounded-lg bg-gold px-7 py-3 text-sm font-semibold text-navy shadow-lg shadow-black/30 hover:bg-goldlight">Get Started Free</a>
-      <a href="#how-it-works" class="inline-block rounded-lg border border-white/20 px-7 py-3 text-sm font-semibold text-ice hover:bg-white/5">See How It Works</a>
+      <a href="https://app.raseedee.com" class="inline-block rounded-lg bg-gold px-7 py-3 text-sm font-semibold text-navy shadow-lg shadow-black/30 hover:bg-goldlight" data-i18n="index.ctaButton1">Get Started Free</a>
+      <a href="#how-it-works" class="inline-block rounded-lg border border-white/20 px-7 py-3 text-sm font-semibold text-ice hover:bg-white/5" data-i18n="index.ctaButton2">See How It Works</a>
     </div>
   </div>
 </section>
@@ -648,51 +673,50 @@
       <div class="lg:col-span-1">
         <div class="flex items-center gap-2 font-semibold text-white">
           <span class="flex h-6 w-6 items-center justify-center rounded-md bg-gold text-navy text-xs">R</span>
-          Raseedee &middot; Beta
+          Raseedee &middot; <span data-i18n="nav.betaBadge">Beta</span>
         </div>
-        <p class="mt-3 text-xs text-ice/40">Personal finance for the Gulf. Currently a free public Beta.</p>
+        <p class="mt-3 text-xs text-ice/40" data-i18n="footer.tagline">Personal finance for the Gulf. Currently a free public Beta.</p>
       </div>
       <div>
-        <p class="text-xs font-semibold uppercase tracking-wider text-ice/40">Product</p>
+        <p class="text-xs font-semibold uppercase tracking-wider text-ice/40" data-i18n="footer.product">Product</p>
         <ul class="mt-3 space-y-2">
-          <li><a href="#product" class="hover:text-white">Features</a></li>
-          <li><a href="#ai" class="hover:text-white">AI Assistant</a></li>
-          <li><a href="#pricing" class="hover:text-white">Pricing</a></li>
-          <li><a href="#investments" class="hover:text-white">Investments</a></li>
+          <li><a href="#product" class="hover:text-white" data-i18n="nav.features">Features</a></li>
+          <li><a href="#ai" class="hover:text-white" data-i18n="footer.aiAssistant">AI Assistant</a></li>
+          <li><a href="#pricing" class="hover:text-white" data-i18n="nav.pricing">Pricing</a></li>
+          <li><a href="#investments" class="hover:text-white" data-i18n="nav.investments">Investments</a></li>
         </ul>
       </div>
       <div>
-        <p class="text-xs font-semibold uppercase tracking-wider text-ice/40">Company</p>
+        <p class="text-xs font-semibold uppercase tracking-wider text-ice/40" data-i18n="footer.company">Company</p>
         <ul class="mt-3 space-y-2">
-          <li><a href="about.html" class="hover:text-white">About</a></li>
+          <li><a href="about.html" class="hover:text-white" data-i18n="footer.about">About</a></li>
           <li>
-            <a href="mailto:support@raseedee.com" class="hover:text-white">Contact</a>
-            <a href="mailto:support@raseedee.com" class="block text-xs text-ice/50 underline hover:text-white">support@raseedee.com</a>
+            <a href="mailto:support@raseedee.com" class="hover:text-white" data-i18n="footer.contact">Contact</a>
+            <a href="mailto:support@raseedee.com" class="block text-xs text-ice/50 underline hover:text-white" dir="ltr">support@raseedee.com</a>
           </li>
         </ul>
       </div>
       <div>
-        <p class="text-xs font-semibold uppercase tracking-wider text-ice/40">Resources</p>
+        <p class="text-xs font-semibold uppercase tracking-wider text-ice/40" data-i18n="footer.resources">Resources</p>
         <ul class="mt-3 space-y-2">
-          <li><a href="docs/index.html" class="hover:text-white">Documentation</a></li>
-          <li><a href="docs/faq.html" class="hover:text-white">FAQ</a></li>
+          <li><a href="docs/index.html" class="hover:text-white" data-i18n="footer.docs">Documentation</a></li>
+          <li><a href="docs/faq.html" class="hover:text-white" data-i18n="footer.faq">FAQ</a></li>
         </ul>
       </div>
       <div>
-        <p class="text-xs font-semibold uppercase tracking-wider text-ice/40">Legal</p>
+        <p class="text-xs font-semibold uppercase tracking-wider text-ice/40" data-i18n="footer.legal">Legal</p>
         <ul class="mt-3 space-y-2">
-          <li><a href="https://app.raseedee.com/privacy" class="hover:text-white">Privacy Notice</a></li>
-          <li><a href="https://app.raseedee.com/terms" class="hover:text-white">Terms of Use</a></li>
-          <li><a href="https://app.raseedee.com/cookies" class="hover:text-white">Cookie Notice</a></li>
-          <li><a href="https://app.raseedee.com/delete-account" class="hover:text-white">Delete My Account / Data</a></li>
+          <li><a href="https://app.raseedee.com/privacy" class="hover:text-white" data-i18n="footer.privacy">Privacy Notice</a></li>
+          <li><a href="https://app.raseedee.com/terms" class="hover:text-white" data-i18n="footer.terms">Terms of Use</a></li>
+          <li><a href="https://app.raseedee.com/cookies" class="hover:text-white" data-i18n="footer.cookies">Cookie Notice</a></li>
+          <li><a href="https://app.raseedee.com/delete-account" class="hover:text-white" data-i18n="footer.deleteAccount">Delete My Account / Data</a></li>
         </ul>
       </div>
     </div>
-    <p class="mt-10 border-t border-white/10 pt-8 text-center text-xs text-ice/30">Raseedee &middot; Beta &middot; &copy; <span id="year"></span> Raseedee. All rights reserved.</p>
+    <p class="mt-10 border-t border-white/10 pt-8 text-center text-xs text-ice/30" data-i18n-year="footer.copyright">Raseedee &middot; Beta &middot; &copy; 2026 Raseedee. All rights reserved.</p>
   </div>
 </footer>
 
-<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 <script src="script.js" defer></script>
 </body>
 </html>

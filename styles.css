@@ -4,7 +4,7 @@
    each HTML page) so utility classes like `bg-navy2` / `text-gold` work
    throughout the markup — this file only holds what utilities can't do. */
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:wght@500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:wght@500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap");
 
 html {
   scroll-behavior: smooth;
@@ -16,6 +16,37 @@ body {
 
 .font-serif-display {
   font-family: "Newsreader", Georgia, serif;
+}
+
+/* ---- Bilingual (EN/AR) support --------------------------------------
+   Arabic pass (Aug 2026): i18n.js sets <html dir="rtl" lang="ar"> for
+   Arabic — Tailwind's logical-property utilities used throughout the
+   markup (ps-/pe-/ms-/me-/start-/end-/text-start/text-end/rounded-s../e..)
+   and native flexbox/grid already re-flow correctly from that one
+   attribute, no extra CSS needed for layout. What *does* need explicit
+   handling here: swapping in an Arabic-compatible font (Noto Sans Arabic,
+   already imported above — same choice the main app makes, see its
+   app/layout.tsx), since "Inter"/"Newsreader" have no Arabic glyphs and
+   would silently fall through to a generic system font otherwise; and
+   mirroring the handful of purely-decorative directional glyphs (arrows)
+   that don't auto-flip since they're plain text characters, not icons. */
+[dir="rtl"] body {
+  font-family: "Noto Sans Arabic", "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+[dir="rtl"] .font-serif-display {
+  font-family: "Noto Sans Arabic", "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+/* Applied to inline arrow characters (←, →) used as "back" / "next" cues in
+   copy — these are decorative direction indicators, not the Raseedee logo
+   or a currency/number, so they're exactly the kind of thing the RTL
+   requirements call out as needing an explicit flip rather than a
+   left/right rewrite in the translated string itself. */
+.rtl-mirror {
+  display: inline-block;
+}
+[dir="rtl"] .rtl-mirror {
+  transform: scaleX(-1);
 }
 
 /* Subtle navy/gold aurora wash instead of the previous emerald/sky/violet

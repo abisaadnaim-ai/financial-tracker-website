@@ -8,6 +8,9 @@
 <title>About — Raseedee</title>
 <meta name="description" content="Raseedee is a personal finance app built for the Gulf and Middle East — track spending, savings, investments and net worth in one bilingual dashboard." />
 <link rel="canonical" href="https://www.raseedee.com/about.html" />
+<link rel="alternate" hreflang="en" href="https://www.raseedee.com/about.html" />
+<link rel="alternate" hreflang="ar" href="https://www.raseedee.com/about.html" />
+<link rel="alternate" hreflang="x-default" href="https://www.raseedee.com/about.html" />
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
@@ -25,12 +28,13 @@
     },
   };
 </script>
+<script src="i18n.js"></script>
 <link rel="stylesheet" href="styles.css" />
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <link rel="icon" href="favicon.ico" sizes="any" />
 <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 </head>
-<body class="bg-navy text-ice antialiased">
+<body class="bg-navy text-ice antialiased" data-page="about">
 
 <header class="sticky top-0 z-50 border-b border-white/10 bg-navy/90 backdrop-blur">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
@@ -42,45 +46,53 @@
         </svg>
       </span>
       <span>Raseedee</span>
-      <span class="rounded-full bg-gold/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-goldlight ring-1 ring-gold/30">Beta</span>
+      <span class="rounded-full bg-gold/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-goldlight ring-1 ring-gold/30" data-i18n="nav.betaBadge">Beta</span>
     </a>
     <nav class="hidden items-center gap-8 text-sm font-medium text-ice/70 md:flex">
-      <a href="index.html#product" class="hover:text-white">Product</a>
-      <a href="index.html#ai" class="hover:text-white">AI</a>
-      <a href="index.html#investments" class="hover:text-white">Investments</a>
-      <a href="index.html#pricing" class="hover:text-white">Pricing</a>
-      <a href="about.html" class="text-white">About</a>
+      <a href="index.html#product" class="hover:text-white" data-i18n="nav.product">Product</a>
+      <a href="index.html#ai" class="hover:text-white" data-i18n="nav.ai">AI</a>
+      <a href="index.html#investments" class="hover:text-white" data-i18n="nav.investments">Investments</a>
+      <a href="index.html#pricing" class="hover:text-white" data-i18n="nav.pricing">Pricing</a>
+      <a href="about.html" class="text-white" data-i18n="nav.about">About</a>
     </nav>
     <div class="flex items-center gap-3">
-      <a href="https://app.raseedee.com" class="hidden text-sm font-medium text-ice/70 hover:text-white sm:block">Log in</a>
-      <a href="https://app.raseedee.com" class="rounded-lg bg-gold px-4 py-2 text-sm font-semibold text-navy hover:bg-goldlight">Get Started Free</a>
-      <button id="mobile-nav-toggle" class="flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 text-ice md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <div class="hidden items-center gap-0.5 rounded-full border border-white/15 px-1 py-1 text-xs text-ice/60 sm:flex">
+        <button type="button" data-lang-switch="en" class="rounded-full px-2 py-1 transition hover:text-white">EN</button>
+        <button type="button" data-lang-switch="ar" class="rounded-full px-2 py-1 transition hover:text-white">العربية</button>
+      </div>
+      <a href="https://app.raseedee.com" class="hidden text-sm font-medium text-ice/70 hover:text-white sm:block" data-i18n="nav.login">Log in</a>
+      <a href="https://app.raseedee.com" class="rounded-lg bg-gold px-4 py-2 text-sm font-semibold text-navy hover:bg-goldlight" data-i18n="nav.getStarted">Get Started Free</a>
+      <button id="mobile-nav-toggle" class="flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 text-ice md:hidden" data-i18n-aria="nav.openMenu" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
     </div>
   </div>
   <nav id="mobile-nav" class="border-t border-white/10 bg-navy px-5 py-4 md:hidden">
     <div class="flex flex-col gap-4 text-sm font-medium text-ice/80">
-      <a href="index.html#product" class="py-1">Product</a>
-      <a href="index.html#ai" class="py-1">AI</a>
-      <a href="index.html#investments" class="py-1">Investments</a>
-      <a href="index.html#pricing" class="py-1">Pricing</a>
-      <a href="docs/index.html" class="py-1">Documentation</a>
-      <a href="https://app.raseedee.com" class="py-1">Log in</a>
+      <a href="index.html#product" class="py-1" data-i18n="nav.product">Product</a>
+      <a href="index.html#ai" class="py-1" data-i18n="nav.ai">AI</a>
+      <a href="index.html#investments" class="py-1" data-i18n="nav.investments">Investments</a>
+      <a href="index.html#pricing" class="py-1" data-i18n="nav.pricing">Pricing</a>
+      <a href="docs/index.html" class="py-1" data-i18n="nav.docs">Documentation</a>
+      <a href="https://app.raseedee.com" class="py-1" data-i18n="nav.login">Log in</a>
+      <div class="flex items-center gap-2 border-t border-white/10 pt-4 text-xs text-ice/60">
+        <button type="button" data-lang-switch="en" class="rounded-full border border-white/15 px-2.5 py-1 transition">EN</button>
+        <button type="button" data-lang-switch="ar" class="rounded-full border border-white/15 px-2.5 py-1 transition">العربية</button>
+      </div>
     </div>
   </nav>
 </header>
 
 <section class="hero-glow relative overflow-hidden border-b border-white/10">
-  <div class="blob -left-24 -top-24 h-72 w-72 bg-gold/10" aria-hidden="true"></div>
+  <div class="blob -start-24 -top-24 h-72 w-72 bg-gold/10" aria-hidden="true"></div>
   <div class="reveal relative mx-auto max-w-3xl px-5 py-20">
-    <h1 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">Why Raseedee exists</h1>
+    <h1 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl" data-i18n="about.title">Why Raseedee exists</h1>
     <div class="mt-8 space-y-5 text-ice/80">
-      <p>Raseedee started as a personal spreadsheet — a way to track every riyal earned and spent while rebuilding financially in Doha, Qatar. It grew into an automated system, then a real app.</p>
-      <p>That same discipline is now built for anyone in the Gulf who wants a clear, honest picture of their money — spending, savings, investments and net worth, in one bilingual dashboard, without wrestling with a bank app or building a spreadsheet from scratch.</p>
-      <p>Raseedee is built specifically for the Gulf and Middle East: Arabic and English, GCC currencies, and a product designed around how people here actually earn, spend and save — not a global app with a translation added on.</p>
+      <p data-i18n="about.p1">Raseedee started as a personal spreadsheet — a way to track every riyal earned and spent while rebuilding financially in Doha, Qatar. It grew into an automated system, then a real app.</p>
+      <p data-i18n="about.p2">That same discipline is now built for anyone in the Gulf who wants a clear, honest picture of their money — spending, savings, investments and net worth, in one bilingual dashboard, without wrestling with a bank app or building a spreadsheet from scratch.</p>
+      <p data-i18n="about.p3">Raseedee is built specifically for the Gulf and Middle East: Arabic and English, GCC currencies, and a product designed around how people here actually earn, spend and save — not a global app with a translation added on.</p>
     </div>
-    <a href="index.html" class="mt-10 inline-block rounded-lg border border-white/20 px-6 py-3 text-sm font-semibold text-ice hover:bg-white/5">&larr; Back to home</a>
+    <a href="index.html" class="mt-10 inline-block rounded-lg border border-white/20 px-6 py-3 text-sm font-semibold text-ice hover:bg-white/5"><span class="rtl-mirror" aria-hidden="true">&larr;</span> <span data-i18n="about.backHome">Back to home</span></a>
   </div>
 </section>
 
@@ -89,25 +101,24 @@
     <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
       <div class="flex items-center gap-2 font-semibold text-white">
         <span class="flex h-6 w-6 items-center justify-center rounded-md bg-gold text-navy text-xs">R</span>
-        Raseedee &middot; Beta
+        Raseedee &middot; <span data-i18n="nav.betaBadge">Beta</span>
       </div>
       <nav class="flex flex-wrap items-center justify-center gap-6">
-        <a href="index.html#product" class="hover:text-white">Product</a>
-        <a href="index.html#pricing" class="hover:text-white">Pricing</a>
-        <a href="docs/index.html" class="hover:text-white">Docs</a>
-        <a href="mailto:support@raseedee.com" class="hover:text-white">Contact</a>
-        <a href="https://app.raseedee.com/privacy" class="hover:text-white">Privacy Notice</a>
-        <a href="https://app.raseedee.com/terms" class="hover:text-white">Terms of Use</a>
-        <a href="https://app.raseedee.com/cookies" class="hover:text-white">Cookie Notice</a>
-        <a href="https://app.raseedee.com/delete-account" class="hover:text-white">Delete My Account / Data</a>
+        <a href="index.html#product" class="hover:text-white" data-i18n="nav.product">Product</a>
+        <a href="index.html#pricing" class="hover:text-white" data-i18n="nav.pricing">Pricing</a>
+        <a href="docs/index.html" class="hover:text-white" data-i18n="nav.docsShort">Docs</a>
+        <a href="mailto:support@raseedee.com" class="hover:text-white" data-i18n="footer.contact">Contact</a>
+        <a href="https://app.raseedee.com/privacy" class="hover:text-white" data-i18n="footer.privacy">Privacy Notice</a>
+        <a href="https://app.raseedee.com/terms" class="hover:text-white" data-i18n="footer.terms">Terms of Use</a>
+        <a href="https://app.raseedee.com/cookies" class="hover:text-white" data-i18n="footer.cookies">Cookie Notice</a>
+        <a href="https://app.raseedee.com/delete-account" class="hover:text-white" data-i18n="footer.deleteAccount">Delete My Account / Data</a>
       </nav>
     </div>
-    <p class="mt-8 text-center text-xs text-ice/60">Contact: <a href="mailto:support@raseedee.com" class="underline hover:text-white">support@raseedee.com</a></p>
-    <p class="mt-2 text-center text-xs text-ice/30">Raseedee &middot; Beta &middot; &copy; <span id="year"></span> Raseedee. All rights reserved.</p>
+    <p class="mt-8 text-center text-xs text-ice/60"><span data-i18n="footer.contact">Contact</span>: <a href="mailto:support@raseedee.com" class="underline hover:text-white" dir="ltr">support@raseedee.com</a></p>
+    <p class="mt-2 text-center text-xs text-ice/30" data-i18n-year="footer.copyright">Raseedee &middot; Beta &middot; &copy; 2026 Raseedee. All rights reserved.</p>
   </div>
 </footer>
 
-<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 <script src="script.js" defer></script>
 </body>
 </html>
