@@ -12,13 +12,16 @@
 <title>Raseedee — Personal Finance for the Gulf</title>
 <meta name="description" content="Track spending, savings, investments and net worth in one bilingual personal finance app built for the Gulf and Middle East." />
 <link rel="canonical" href="https://www.raseedee.com/" />
-<!-- No per-language URLs exist yet (single static route serves both
-     languages via client-side i18n.js), so hreflang can only self-reference
-     for now rather than truly point at distinct EN/AR documents — see the
-     bilingual-launch report for this known limitation. -->
-<link rel="alternate" hreflang="en" href="https://www.raseedee.com/" />
-<link rel="alternate" hreflang="ar" href="https://www.raseedee.com/" />
-<link rel="alternate" hreflang="x-default" href="https://www.raseedee.com/" />
+<!-- Deliberately no hreflang tags: this page serves both languages from
+     the same URL (client-side i18n.js), and hreflang is only meaningful
+     when each language has its own distinct URL for crawlers to fetch
+     independently. Pointing multiple hreflang alternates at one identical
+     URL isn't a real language signal — it doesn't tell a crawler anything
+     it couldn't already infer, and can read as malformed markup. Real
+     hreflang support would need per-language URLs (e.g. a /ar/ prefix)
+     with server-side language-aware rendering so each URL actually serves
+     different content — a bigger change than this pass's "don't change
+     URLs unnecessarily" scope allows for. Left as a flagged follow-up. -->
 
 <!-- OpenGraph / social preview -->
 <meta property="og:type" content="website" />
